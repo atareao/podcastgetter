@@ -83,8 +83,8 @@ class PodcastDB:
     def create_md(self):
         latest = self.get_latest_podcast(limit=5)
         fmd = open(MD_FILE, 'w')
-        fmd.write('#Podcast\n\n')
-        fmd.write('##Ultimos podcasts\n')
+        fmd.write('# Podcast\n\n')
+        fmd.write('## Ultimos podcasts\n')
         for podcast in latest:
             fmd.write('[{0} - {1}]({2})\n'.format(podcast[0],
                                                   podcast[1],
@@ -165,8 +165,8 @@ class PodcastDB:
 
 if __name__ == '__main__':
     db = PodcastDB()
-    #db.update_podcasts()
-    #db.create_m3u()
+    db.update_podcasts()
+    db.create_m3u()
     print(db.get_latest_podcast())
     print(db.create_md())
     exit(0)
