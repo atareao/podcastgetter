@@ -86,14 +86,14 @@ class PodcastDB:
         fmd.write('# Podcast\n\n')
         fmd.write('## Ultimos podcasts\n')
         for podcast in latest:
-            fmd.write('[{0} - {1}]({2})\n\n'.format(podcast[0],
+            fmd.write('* [{0} - {1}]({2})\n'.format(podcast[0],
                                                   podcast[1],
                                                   podcast[2]))
         for podcast in PODCASTS:
             latest = self.get_latest_podcast(podcast=podcast['name'])
             fmd.write('\n## {0}\n'.format(podcast['name']))
             for podcast in latest:
-                fmd.write('[{0}]({1})\n\n'.format(podcast[1], podcast[2]))
+                fmd.write('* [{0}]({1})\n'.format(podcast[1], podcast[2]))
         fmd.close()
 
     def create_m3u(self):
