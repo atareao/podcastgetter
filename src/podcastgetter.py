@@ -86,7 +86,7 @@ class PodcastDB:
         fmd.write('# Podcast\n\n')
         fmd.write('## Ultimos podcasts\n')
         for podcast in latest:
-            fmd.write('[{0} - {1}]({2})\n'.format(podcast[0],
+            fmd.write('[{0} - {1}]({2})\n\n'.format(podcast[0],
                                                   podcast[1],
                                                   podcast[2]))
         for podcast in PODCASTS:
