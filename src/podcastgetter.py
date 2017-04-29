@@ -63,37 +63,43 @@ class PodcastDB:
                        (podcast, entry_id, entry_date, entry_title, entry_url))
         self.db.commit()
 
-    def get_latest_podcast(self):
-        latest = []
-        for podcast in PODCASTS:
-            cursor = self.db.cursor()
+    def get_latest_podcast(self, podcast=None, limit=-1):
+        cursor = self.db.cursor()
+        if podcast is not None and limit > -1:
             cursor.execute('''SELECT podcast, entry_title, entry_url
-FROM podcasts WHERE podcast="{0}" ORDER BY entry_date DESC'''.format(podcast['name']))
-            one = cursor.fetchall()
-            if one is not None:
-                latest.append({'name': podcast['name'], 'content': one})
-        return latest
+ FROM podcasts WHERE podcast="{0}" ORDER BY entry_date DESC LIMIT {1}'''.format(
+            podcast, limit))
+        elif podcast is not None and limit == -1:
+            cursor.execute('''SELECT podcast, entry_title, entry_url
+ FROM podcasts WHERE podcast="{0}" ORDER BY entry_date DESC'''.format(podcast))
+        elif podcast is None and limit > -1:
+            cursor.execute('''SELECT podcast, entry_title, entry_url
+ FROM podcasts ORDER BY entry_date DESC LIMIT {0}'''.format(limit))
+        else:
+            cursor.execute('''SELECT podcast, entry_title, entry_url
+ FROM podcasts ORDER BY entry_date DESC''')
+        return cursor.fetchall()
 
     def create_md(self):
-        latest = self.get_latest_podcast()
+        latest = self.get_latest_podcast(limit=5)
         fmd = open(MD_FILE, 'w')
         fmd.write('#Podcast\n\n')
         fmd.write('##Ultimos podcasts\n')
         for podcast in latest:
-            if len(podcast['content']) > 0:
-                fmd.write('[{0} - {1}]({2})\n'.format(podcast['name'],
-                                                      podcast['content'][0][1],
-                                                      podcast['content'][0][2]))
-        for podcast in latest:
+            fmd.write('[{0} - {1}]({2})\n'.format(podcast[0],
+                                                  podcast[1],
+                                                  podcast[2]))
+        for podcast in PODCASTS:
+            latest = self.get_latest_podcast(podcast=podcast['name'])
             fmd.write('\n##{0}\n'.format(podcast['name']))
-            for episode in podcast['content']:
-                fmd.write('[{0}]({1})\n'.format(episode[1], episode[2]))
+            for podcast in latest:
+                fmd.write('[{0}]({1})\n'.format(podcast[1], podcast[2]))
         fmd.close()
 
     def create_m3u(self):
         cursor = self.db.cursor()
         cursor.execute('''SELECT podcast, entry_title, entry_url
- FROM podcasts''')
+ FROM podcasts ORDER BY entry_date DESC''')
         rows = cursor.fetchall()
         try:
             fhtml = open(HTML_FILE, 'w')
@@ -159,8 +165,8 @@ FROM podcasts WHERE podcast="{0}" ORDER BY entry_date DESC'''.format(podcast['na
 
 if __name__ == '__main__':
     db = PodcastDB()
-    db.update_podcasts()
-    db.create_m3u()
+    #db.update_podcasts()
+    #db.create_m3u()
     print(db.get_latest_podcast())
     print(db.create_md())
     exit(0)
