@@ -42,9 +42,9 @@ HTML_START = '''<!DOCTYPE html>
         playlist=$("#playlist");
         ntracks=$("[id^=item-]").length
         audio[0].volume=1;
-        current_pista=playlist.find("#item-"+current);
         current=0;
         current_pista=playlist.find("#item-0");
+        runaudio($(current_pista),audio[0]);
         $("[id^=item-]").click(function(e){
             e.preventDefault();
             link=$(this);
@@ -72,10 +72,11 @@ HTML_START = '''<!DOCTYPE html>
     }
     function playprevious(){
         current--;
-        if(current<0){
-            current=ntracks-1;
-        }
         current_pista=playlist.find("#item-"+current);
+        if(current_pista.length==0){
+            current=ntracks-1;
+            current_pista=playlist.find("#item-"+current);
+        }
         runaudio($(current_pista),audio[0]);
     }
     function runaudio(item,player){
@@ -212,7 +213,7 @@ HTML_START = '''<!DOCTYPE html>
     <div class="panel">
         <div id="player">
             <a href="#" id="left" onclick="return false" title="Anterior"></a>
-            <audio id="audio" preload="auto" tabindex="0" controls="">
+            <audio id="audio" preload="auto" tabindex="0" controls="" autoplay>
                 <source src="https://ia801502.us.archive.org/5/items/051.AdisBloggerHolaGithub/051.%20Adi%C3%B3s%20Blogger,%20Hola%20Github%20.mp3">
             </audio>
             <a href="#" id="right" onclick="return false" title="Siguiente"></a>
