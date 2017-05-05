@@ -1,4 +1,6 @@
 #EXTM3U
+#EXTINF:-1,uGeek - 051. Adiós Blogger, Hola GitHub!
+https://ia801502.us.archive.org/5/items/051.AdisBloggerHolaGithub/051.%20Adi%C3%B3s%20Blogger,%20Hola%20Github%20.mp3
 #EXTINF:-1,uGeek - 050. Que ando haciendo, nuevas publicaciones y más...
 https://ia801505.us.archive.org/9/items/050.QueAndoHaciendo/050.%20Que%20ando%20haciendo.mp3
 #EXTINF:-1,Eduardo Collado - Podcast #26: Odoo y transformación digital
@@ -25,8 +27,12 @@ http://www.ivoox.com/117-sin-sombra-helicoptero_mf_18309317_feed_1.mp3
 http://www.ivoox.com/116-conociendo-deepin-gnu-linux-15-4_mf_18295101_feed_1.mp3
 #EXTINF:-1,Eduardo Collado - Podcast #25: Introducción a Docker
 https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/04/podcast-25-introduccion-a-docker.mp3
+#EXTINF:-1,uGeek - 046. Sincronización de carpetas entre dispositivos. Syncthing, Resilio y Dukto
+https://ia601509.us.archive.org/6/items/046SyncthingResilioYDukto/%23046%20Syncthing%2c%20Resilio%20y%20Dukto%20.mp3
 #EXTINF:-1,uGeek - #046 Sincronización de carpetas entre dispositivos. Syncthing, Resilio y Dukto
 https://ia601509.us.archive.org/6/items/046SyncthingResilioYDukto/%23046%20Syncthing%2C%20Resilio%20y%20Dukto%20.mp3
+#EXTINF:-1,uGeek - 041. Ubuntu y el adios de Unity
+https://ia801502.us.archive.org/1/items/041UbuntuYElAdiosAUnity/%23041%20Ubuntu%20y%20el%20adi%c3%b3s%20a%20Unity.mp3
 #EXTINF:-1,Eduardo Collado - Podcast #24: Sobre Vlans
 https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/04/podcast-24-sobre-vlans.mp3
 #EXTINF:-1,MosqueteroWeb - Seguridad por Hardware en tu Servidor casero
@@ -95,38 +101,56 @@ https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploa
 https://ia601500.us.archive.org/4/items/033BotDePocketParaTelegram/%23033%20Bot%20de%20Pocket%20para%20Telegram.mp3
 #EXTINF:-1,uGeek - #032 Miscelánea de Viernes
 https://ia801505.us.archive.org/16/items/032MiscelaneaDeViernes/%23032%20Miscel%c3%a1nea%20de%20Viernes.mp3
+#EXTINF:-1,uGeek - 032. Miscelánea de Viernes
+https://ia601606.us.archive.org/30/items/032MiscelaneaDeViernes/%23032%20Miscel%C3%A1nea%20de%20Viernes.mp3
 #EXTINF:-1,uGeek - #031 Keepass, como gestiono mis contraseñas
 https://ia601504.us.archive.org/8/items/031Keepass.ComoGestionoMisContrasenas/%23031%20Keepass.%20Como%20gestiono%20mis%20contrase%C3%B1as.mp3
+#EXTINF:-1,uGeek - 031. Keepass, como gestiono mis contraseñas
+https://ia601606.us.archive.org/14/items/031Keepass.ComoGestionoMisContrasenas/%23031%20Keepass.%20Como%20gestiono%20mis%20contrase%C3%B1as.mp3
 #EXTINF:-1,uGeek - #030 Mumble, VoIP de Software Libre. Nextcloud, Wallabag y kdenlive
 https://ia601501.us.archive.org/18/items/030Mumble/%23030%20Mumble.mp3
+#EXTINF:-1,uGeek - 030. Mumble, VoIP de Software Libre. Nextcloud, Wallabag y kdenlive
+https://ia601609.us.archive.org/0/items/030Mumble/%23030%20Mumble.mp3
 #EXTINF:-1,Salmorejo Geek - #111 Problemas con la Focusrite Scarlett Solo y 2i2 en macOS Sierra
 http://www.ivoox.com/111-problemas-focusrite-scarlett-solo-y_mf_17626877_feed_1.mp3
 #EXTINF:-1,Eduardo Collado - Podcast #18: Herramientas simples y útiles para un adminsitrador de red
 https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/03/podcast-18-herramientas-simples-y-utiles-para-un-adminsitrador-de-red.mp3
 #EXTINF:-1,uGeek - #029 Miscelánea de Viernes.
 https://ia801504.us.archive.org/24/items/029MiscelneaDeViernes/%23029%20Miscel%c3%a1nea%20de%20viernes.mp3
+#EXTINF:-1,uGeek - 029. Miscelánea de Viernes.
+https://ia601608.us.archive.org/28/items/029MiscelneaDeViernes/%23029%20Miscel%C3%A1nea%20de%20viernes.mp3
 #EXTINF:-1,uGeek - #028 Instala un servidor de mensajeria tipo Whatsapp o Telegram y de Software Libre con XMPP/Jabber
 https://ia801507.us.archive.org/27/items/ugeekpodcast_gmail_XMPP/XMPP.mp3
+#EXTINF:-1,uGeek - 028. Instala un servidor de mensajeria tipo Whatsapp o Telegram y de Software Libre con XMPP/Jabber
+https://ia601607.us.archive.org/17/items/ugeekpodcast_gmail_XMPP/XMPP.mp3
 #EXTINF:-1,Podcast Linux - #20 Linux Connexion con David Montalva (Lliurex)
 http://www.ivoox.com/20-linux-connexion-david-montalva-lliurex_mf_17557164_feed_1.mp3
 #EXTINF:-1,Salmorejo Geek - #110 Armando un nuevo PC para Linux
 http://www.ivoox.com/110-armando-nuevo-pc-para-linux_mf_17538251_feed_1.mp3
 #EXTINF:-1,uGeek - #027 Instala una VPN (OpenVpn) en Ubuntu o Raspberry Pi con PiVpn
 https://ia601502.us.archive.org/9/items/027InstalaTuVpnEnUbuntuORaspberryPi/%23027%20instala%20tu%20vpn%20en%20Ubuntu%20o%20Raspberry%20Pi.mp3
+#EXTINF:-1,uGeek - 027. Instala una VPN (OpenVpn) en Ubuntu o Raspberry Pi con PiVpn
+https://ia601606.us.archive.org/3/items/027InstalaTuVpnEnUbuntuORaspberryPi/%23027%20instala%20tu%20vpn%20en%20Ubuntu%20o%20Raspberry%20Pi.mp3
 #EXTINF:-1,Eduardo Collado - Podcast #17: Sistemas de monitorización de sistemas y red
 https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/03/podcast-17-sistemas-de-monitorizacion-de-sistemas-y-red.mp3
 #EXTINF:-1,Eduardo Collado - Podcast #16: Directo 11 de Marzo 2017
 https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/03/podcast-16-directo-11-marzo-2017.mp3
 #EXTINF:-1,uGeek - #026 Podcast con Frank de Batería2x100, Hablamos de como gestionamos nuestras Fotos, actualidad y sorteo del libro del año
 https://ia801509.us.archive.org/34/items/026PodcastConFrankDeBatera2x100/%23026%20Podcast%20con%20Frank%20de%20Bater%c3%ada2x100.mp3
+#EXTINF:-1,uGeek - 026. Podcast con Frank de Batería2x100, Hablamos de como gestionamos nuestras Fotos, actualidad y sorteo del libro del año
+https://ia601606.us.archive.org/25/items/026PodcastConFrankDeBatera2x100/%23026%20Podcast%20con%20Frank%20de%20Bater%C3%ADa2x100.mp3
 #EXTINF:-1,MosqueteroWeb - Transexualidad
 https://www.ivoox.com/transexualidad_mf_17427425_feed_1.mp3
 #EXTINF:-1,MosqueteroWeb - FlintOS, Raspberry PI y Vernee Thor
 https://www.ivoox.com/flintos-raspberry-pi-vernee-thor_mf_17416576_feed_1.mp3
 #EXTINF:-1,uGeek - #025 Metodo mas completo para recopilar notas, org Mode
 https://ia601504.us.archive.org/22/items/025MtodoMMsCompletoQueParaRecopilarNotasOrgMode/%23025%20M%C3%A9todo%20m%C3%A1s%20completo%20que%20para%20recopilar%20notas%2C%20org%20mode.mp3
+#EXTINF:-1,uGeek - 025. Metodo mas completo para recopilar notas, org Mode
+https://ia601600.us.archive.org/16/items/025MtodoMMsCompletoQueParaRecopilarNotasOrgMode/%23025%20M%C3%A9todo%20m%C3%A1s%20completo%20que%20para%20recopilar%20notas%2C%20org%20mode.mp3
 #EXTINF:-1,Salmorejo Geek - #109 Mi vuelta a Antergos Linux al estilo Atlético de Madrid
 http://www.ivoox.com/109-mi-vuelta-a-antergos-linux-al-estilo_mf_17415345_feed_1.mp3
+#EXTINF:-1,uGeek - 024. Conectate remotamente a tu Raspberry Pi con "dataplicity"
+https://ia601605.us.archive.org/10/items/024ConectateRemotamenteATuRaspberryPiCondataplicity/%23024%20Conectate%20remotamente%20a%20tu%20Raspberry%20Pi%20con%20%22dataplicity%22%20.mp3
 #EXTINF:-1,uGeek - #024 Conectate remotamente a tu Raspberry Pi con "dataplicity"
 https://ia601505.us.archive.org/21/items/024ConectateRemotamenteATuRaspberryPiCondataplicity/%23024%20Conectate%20remotamente%20a%20tu%20Raspberry%20Pi%20con%20%22dataplicity%22%20.mp3
 #EXTINF:-1,Eduardo Collado - Podcast #15: Mumble, tu mesa de reuniones virtual
@@ -135,38 +159,86 @@ https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploa
 http://www.ivoox.com/108-directo-asi-estan-cosas-marzo_mf_17354573_feed_1.mp3
 #EXTINF:-1,uGeek - #023 Entrevista a Chema y Juan, dos desarrolladores de Software Libre de Igalia.com en el #mwc17
 https://ia601507.us.archive.org/8/items/EntrevistaADosDesarrolladoresDeSoftwareLibreDeIgalia/Entrevista%20a%20dos%20desarrolladores%20de%20Software%20Libre%20de%20Igalia.mp3
+#EXTINF:-1,uGeek - 023. Entrevista a Chema y Juan, dos desarrolladores de Software Libre de Igalia.com en el #mwc17
+https://ia801609.us.archive.org/20/items/EntrevistaADosDesarrolladoresDeSoftwareLibreDeIgalia/Entrevista%20a%20dos%20desarrolladores%20de%20Software%20Libre%20de%20Igalia.mp3
+#EXTINF:-1,uGeek - 022. Entrevista con Arturo Suarez, DIrectivo del Cloud de Canonical Ubuntu
+https://ia601600.us.archive.org/33/items/EntrevistaConArturoSuarezDirectivoDelCloudDeCanonicalUbuntu/Entrevista%20con%20Arturo%20Suarez,%20Directivo%20del%20Cloud%20de%20Canonical%20Ubuntu.mp3
 #EXTINF:-1,Podcast Linux - #19 GNU/Linux en la escuela
 http://www.ivoox.com/19-gnu-linux-escuela_mf_17289281_feed_1.mp3
 #EXTINF:-1,MosqueteroWeb - AMD vs Intel. Samsung. Nokia MWC Spotify Cloudflare Martingala
 https://www.ivoox.com/amd-vs-intel-samsung-nokia-mwc-spotify-cloudflare_mf_17285109_feed_1.mp3
 #EXTINF:-1,Eduardo Collado - Podcast #14: Radio o Podcast, no elijas puedes tener las dos
 https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/02/podcast-14-radio-o-podcast.mp3
+#EXTINF:-1,uGeek - 021. Ubuntu en el Mobile World Congress
+https://ia801606.us.archive.org/21/items/021UbuntuEnMobileWorldCongress/%23021%20ubuntu%20en%20Mobile%20World%20Congress%20.mp3
 #EXTINF:-1,Eduardo Collado - Podcast #13: OSPF Multiárea
 https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/02/podcast-13-ospf-multiarea.mp3
+#EXTINF:-1,uGeek - 020. Podcast con Frank de Batería2x100, Hablamos de como gestionamos nuestra notas y mucho mas...
+https://ia601601.us.archive.org/7/items/20PodcastConFrankDeBatera2x100HablamosDeComoGestionamosNuestraNotas/%2320%20Podcast%20con%20Frank%20de%20Bater%c3%ada2x100%2c%20Hablamos%20de%20como%20gestionamos%20nuestra%20notas%20.mp3
 #EXTINF:-1,MosqueteroWeb - Noticias Tecnológicas
 https://www.ivoox.com/noticias-tecnologicas_mf_17193972_feed_1.mp3
+#EXTINF:-1,uGeek - 019. Dokuwiki, nueva forma de tomar mis notas. Monta tu wiki con DokuWiki o MediaWiki.
+https://ia601603.us.archive.org/6/items/019DokuwikiNuevaFormaDeTomarMisNotas/%23019%20Dokuwiki%2c%20nueva%20forma%20de%20tomar%20mis%20notas%20.mp3
+#EXTINF:-1,uGeek - 018. Como montar Wallabag, el Pocket o Instapaper de software libre y lo mejor de todo, en tu servidor
+https://ia601604.us.archive.org/24/items/018WallabagElPocketOInstapaper/%23018_Wallabag%2c_el_Pocket_o_Instapaper.mp3
 #EXTINF:-1,Eduardo Collado - Podcast #12: Atención al cliente y migrar una web
 https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/02/podcast-12-atencion-al-cliente-y-migrar-una-web.mp3
+#EXTINF:-1,uGeek - 017. Podcast con Frank de Bateria2x100, hablando de Plex, Nextcloud...
+https://ia801300.us.archive.org/34/items/017PodcastConFrankDeBateria2x100HablandoDePlexNextcloud.../%23017%20Podcast%20con%20Frank%20de%20Bateria2x100%2c%20hablando%20de%20Plex%2c%20Nextcloud....mp3
+#EXTINF:-1,uGeek - 016. Que es un Servidor (dudas oyentes), servidor web, ...
+https://ia801603.us.archive.org/24/items/016QueEsUnServidor/%23016%20Que%20es%20un%20servidor.mp3
+#EXTINF:-1,uGeek - 015. Como ampliar el almacenamiento de Nextcloud, combinar con nubes publicas y hacer copias de mis fotos.
+https://ia801603.us.archive.org/20/items/015AlmacenamientoTheNextcloud/%23015_almacenamiento_the_nextcloud.mp3
 #EXTINF:-1,Podcast Linux - #18 Linux Connexion con Bitácora de Ciberseguridad
 http://www.ivoox.com/18-linux-connexion-bitacora-ciberseguridad_mf_17029145_feed_1.mp3
+#EXTINF:-1,uGeek - 014. Notas en Nextcloud y Markdown
+https://ia601602.us.archive.org/11/items/NotasEnNextcloud/Notas%20en%20nextcloud.mp3
+#EXTINF:-1,uGeek - 013. News y FreshRSS. Gestor de Noticias RSS.
+https://ia801601.us.archive.org/21/items/013NewsYFreshRSS.GestorDeNoticiasRSS/%23013%20News%20y%20Fresh%20RSS.%20Gestor%20de%20Noticias%20RSS.mp3
+#EXTINF:-1,uGeek - 013. bis F-Droid Tienda Android de aplicaciones de Software Libre y Actualizar las Noticias en Nextcloud.
+https://ia801604.us.archive.org/21/items/013FDroidAplicacionesDeSoftwareLibre/%23013%20F-Droid%20Aplicaciones%20de%20Software%20Libre.mp3
 #EXTINF:-1,Salmorejo Geek - #107 No soy un Fanboy
 http://www.ivoox.com/107-no-soy-fanboy_mf_16980247_feed_1.mp3
+#EXTINF:-1,uGeek - 012. Como actualizar Nextcloud y salir del modo de "mantenimiento"
+https://ia801601.us.archive.org/24/items/012CmoActualizarNextcloudY/%23012_c%c3%b3mo_actualizar_Nextcloud_y.mp3
 #EXTINF:-1,MosqueteroWeb - W10 NO va bien. Mac vs Linux. Directo con ChineseDroid+AndroyTecno
 https://www.ivoox.com/w10-no-va-bien-mac-vs-linux-directo_mf_16950998_feed_1.mp3
 #EXTINF:-1,Eduardo Collado - Podcast #11: OSPF en un único área
 https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/02/podcast-11-ospf-en-un-area.mp3
+#EXTINF:-1,uGeek - 011. Podcast con Frank de Bateria2x100, hablando un poco de todo...
+https://ia801602.us.archive.org/16/items/011PodcastConFrankDeBateria2x100/%23011%20Podcast%20con%20Frank%20de%20Bateria2x100.mp3
 #EXTINF:-1,Salmorejo Geek - #106 Linux no es difícil, somos los viejos usuarios quienes lo hacemos así
 http://www.ivoox.com/106-linux-no-es-dificil-somos-viejos_mf_16934360_feed_1.mp3
+#EXTINF:-1,uGeek - 010. CloudReady el Chromium OS de bolsillo
+https://ia601603.us.archive.org/9/items/010ElSistemaOperativoDeBolsillo/%23010%20El%20Sistema%20Operativo%20de%20bolsillo.mp3
+#EXTINF:-1,uGeek - 009. Crea tu podcast en 3 simples pasos y totalmente gratis
+https://ia601602.us.archive.org/11/items/ComoCrearTuPodcastYTotalmenteGtatis/Como%20crear%20tu%20podcast%20y%20totalmente%20gtatis.mp3
+#EXTINF:-1,uGeek - 008. Como gestiono mis Notas
+https://ia801900.us.archive.org/13/items/008ComoGestionoMisNotas/%23008%20Como%20gestiono%20mis%20notas.mp3
 #EXTINF:-1,MosqueteroWeb - Batiburrillo con AndroyTecno
 https://www.ivoox.com/batiburrillo-androytecno_mf_16862300_feed_1.mp3
+#EXTINF:-1,uGeek - 007. Linux es una alternativa real
+hhttps://ia601902.us.archive.org/28/items/007LinuxEsUnaAlternativaReal/%23007%20Linux%20es%20una%20alternativa%20real.mp3
+#EXTINF:-1,uGeek - 006. El Trello de Software Libre Wekan y Kanboard para Raspberry Pi. El sistema Kanban en tu servidor.
+https://ia601900.us.archive.org/18/items/ElTrelloDeSoftwareLibreWekan/El_Trello_de_software_libre_Wekan.mp3
 #EXTINF:-1,Salmorejo Geek - #105 #Directo Así están las cosas (Febrero 2017)
 http://www.ivoox.com/105-directo-asi-estan-cosas-febrero-2017_mf_16815748_feed_1.mp3
 #EXTINF:-1,Eduardo Collado - Podcast #10: Cómo funciona el DNS
 https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/02/podcast-10-dns-y-arp.mp3
+#EXTINF:-1,uGeek - 005. Paper de Dropbox
+https://ia601603.us.archive.org/9/items/005PaperDeDropbox/%23005%20Paper%20de%20Dropbox.mp3
 #EXTINF:-1,Podcast Linux - #17 Linux Connexion con Alexandre Filgueira
 http://www.ivoox.com/17-linux-connexion-alexandre-filgueira_mf_16768269_feed_1.mp3
 #EXTINF:-1,Eduardo Collado - Podcast #9: Streaming con Icecast 2
 https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/01/podcast-9-streaming-con-icecat2-mp3.mp3
+#EXTINF:-1,uGeek - 004. Servidor Linux Vs QNAP-Synology
+https://ia601903.us.archive.org/19/items/004ServidorLinuxVsQNapSynology/%23004%20Servidor%20Linux%20Vs%20QNap-Synology.mp3
+#EXTINF:-1,uGeek - 003. Nextcloud. Instalar tu Nube en menos de 2 minutos.
+https://ia601903.us.archive.org/4/items/003Nextcloud/%23003%20Nextcloud.mp3
+#EXTINF:-1,uGeek - 002. "De qué va esto de uGeek?"
+https://ia801904.us.archive.org/20/items/DeQueVaEstoDeUGeek/De%20que%20va%20esto%20de%20uGeek%3f.mp3
+#EXTINF:-1,uGeek - 001. Hola Mundo
+https://ia801602.us.archive.org/21/items/HolaMundo_201701/Hola%20Mundo.mp3
 #EXTINF:-1,Eduardo Collado - Podcast #8: El viaje de cargar una web
 https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/01/podcast-8-el-viaje-de-cargar-una-web.mp3
 #EXTINF:-1,Salmorejo Geek - #104 Probando 3 cacharros de Amazon: Adaptadores Wifi, Bluetooth y disco duro Sata
