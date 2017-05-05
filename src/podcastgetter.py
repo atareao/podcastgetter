@@ -36,6 +36,9 @@ HTML_START = '''<!DOCTYPE html>
     var playlist;
     var tracks;
     var current;
+    var previous;
+    var current_track;
+    var previous_track;
     var ntracks;
     function initaudio(){
         audio=$("audio");
@@ -43,13 +46,18 @@ HTML_START = '''<!DOCTYPE html>
         ntracks=$("[id^=item-]").length
         audio[0].volume=1;
         current=0;
-        current_pista=playlist.find("#item-0");
-        runaudio($(current_pista),audio[0]);
+        previous=ntracks-1;
+        current_track=playlist.find("#item-0");
+        previous_track=playlist.find("#item-"+previous);
+        runaudio(current_track, audio[0],false);
         $("[id^=item-]").click(function(e){
             e.preventDefault();
-            link=$(this);
-            current=link.parent().index();
-            runaudio(link, audio[0]);
+            previous=current;
+            previous_track=current_track;
+            remove_play(previous_track);
+            current_track=$(this);
+            current=current_track.parent().index();
+            runaudio(current_track, audio[0]);
         });
         audio[0].addEventListener("ended",function(e){
             playnext();
@@ -62,38 +70,53 @@ HTML_START = '''<!DOCTYPE html>
         });
     };
     function playnext(){
+        previous=current;
+        previous_track=current_track;
+        remove_play(previous_track);
         current++;
-        current_pista=playlist.find("#item-"+current);
-        if(current_pista.length==0){
+        current_track=playlist.find("#item-"+current);
+        if(current_track.length==0){
             current=0;
-            current_pista=playlist.find("#item-0");
+            current_track=playlist.find("#item-0");
         }
-        runaudio($(current_pista),audio[0]);
+        runaudio($(current_track),audio[0]);
     }
     function playprevious(){
+        previous=current;
+        previous_track=current_track;
+        remove_play(previous_track);
         current--;
-        current_pista=playlist.find("#item-"+current);
-        if(current_pista.length==0){
+        current_track=playlist.find("#item-"+current);
+        if(current<0){
             current=ntracks-1;
-            current_pista=playlist.find("#item-"+current);
         }
-        runaudio($(current_pista),audio[0]);
+        current_track=playlist.find("#item-"+current);
+        runaudio($(current_track),audio[0]);
     }
-    function runaudio(item,player){
-        title=$(item.find(".title"));
-        $("#podcaster").text(title.text());
-        link=$(item.find("a"));
-        episode = link.text()
-        if(episode.length>33){
-            $("#episode").text(link.text().substring(0,30)+"...");
+    function remove_play(item){
+        isp=$(item.find(".isplaying"));
+        isp.html("");
+    }
+    function runaudio(item, player,play=true){
+        isp=$(item.find(".isplaying"))
+        isp.html("<i class='fa fa-play' aria-hidden='true'></i>");
+        podcast=$(item.find(".podcast"));
+        $("#podcast").text(podcast.text());
+        track=$(item.find(".track"));
+        if(track.text().length>33){
+            $("#track").text(track.text().substring(0,30)+"...");
         }else{
-            $("#episode").text(link.text());
+            $("#track").text(track.text());
         }
+        link=$(item.find('a'));
         player.src=link.attr("href");
         par=link.parent();
         par.addClass("active").siblings().removeClass("active");
         audio[0].load();
-        audio[0].play();
+        if(play==true){
+            console.log(play);
+            audio[0].play();
+        }
     }
     $(document).ready(function(){ 
         console.log($("[id^=item-]").length);
@@ -107,17 +130,18 @@ HTML_START = '''<!DOCTYPE html>
         initaudio();
     });
     </script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <style>
         #left{
-            background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAgCAYAAAAbifjMAAAAl0lEQVRIx+3UMQoCMRRF0aO1VloKdroM3YvgSsRdiJ2uwkYstRbciVVsZmAMMmYmbS6EVO9+Ql5CodCNMc549AkvcUGoVhKDal/j1QiHLpO3eEfhkDp9/yOYJJji2BJuFcxx+xNuFTwTwl+CYSQIuWWZ4ZpzBJjgkCOor3GXI6jZ9C1Ss8qrnCrXLPo8ppgRTriXn60Q8wECX1R63JgTcwAAAABJRU5ErkJggg==");
+            margin-top: 7px;
             float: left;
             width: 16px;
             height: 32px;
             cursor:hand;
         }
         #right{
-            background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAgCAYAAAAbifjMAAAAjUlEQVRIx+3UOwoCQRCE4W+NNdJQMNNj6F0ETyLeQsz0FJuIoaYG3mSjNtlgQRDtSaegkoH+KaYfVFV96o4zxllA9G6xLAEEXlj3700GEOiwzSYYev9rivjiI6YlgMAV8xJA4DksGCU61ZQkuGGRBZwwy37iIdvGDruSUd5kR7nFKrNMD1wwqZet6h+9AfPLU3sbivmUAAAAAElFTkSuQmCC");
+            margin-top: 7px;
             float:left;
             width: 16px;
             height: 32px;
@@ -145,6 +169,9 @@ HTML_START = '''<!DOCTYPE html>
         body{
             background-color: rgb(247, 247, 247);
             font-family: "Roboto", sans-serif;
+            body { background-image: 
+            background.image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10'><linearGradient id='gradient'><stop offset='10%' stop-color='%23F00'/><stop offset='90%' stop-color='%23fcc'/> </linearGradient><rect fill='url(%23gradient)' x='0' y='0' width='100%' height='100%'/></svg>");
+      }
         }
         .panel{
             webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
@@ -159,13 +186,14 @@ HTML_START = '''<!DOCTYPE html>
             margin-bottom: 20px;
         }
         audio {
-            width:300px; /* Ancho del reproductor */
+            width:250px; /* Ancho del reproductor */
             display: block;
             float:left;
         }
         ul {
           list-style-type: none;
-        }        
+          padding-left: 0px;
+        }
         li {
             list-style-type: none;
             height:70px;
@@ -175,19 +203,36 @@ HTML_START = '''<!DOCTYPE html>
             line-height: 20px;
             display: block;
             }
+        .isplaying{
+            float:left;
+            margin-top:12px;
+            width:24px;
+            height:24px;
+            margin-right: 5px;
+        }
         .logo{
             float:left;
             width:48px;
             height:48px;
             margin-right: 5px;
         }
-        .title{
+        .podcast, #podcast{
             display: block;
-            font-size: 18px;
+            font-size: 16px;
+            font-weight: 400;
+            color:rgba(0,0,0,.87);
             }
-        .mp3, #episode, #podcaster{
+        .track, #track{
             display: block;
             font-size: 14px;
+            font-weight: normal;
+            color:rgba(0,0,0,.54);
+        }
+        #track{
+            text-overflow: ellipsis;
+            display: -webkit-box;
+           -webkit-box-orient: vertical;
+           -webkit-line-clamp: 2;
         }
         #player{
             height:80px;
@@ -201,6 +246,14 @@ HTML_START = '''<!DOCTYPE html>
             font-size: 12px;
             color: #9E9E9E;
         }
+        a{
+            text-decoration:none;
+            color:rgba(0,0,0,.54);
+        }
+        a:visited{
+            text-decoration: none;
+            color:rgba(0,0,0,.54);
+        }
         @media only screen and (min-width: 700px) {
             .panel{
                 width:600px;
@@ -212,21 +265,24 @@ HTML_START = '''<!DOCTYPE html>
 <body>
     <div class="panel">
         <div id="player">
-            <a href="#" id="left" onclick="return false" title="Anterior"></a>
-            <audio id="audio" preload="auto" tabindex="0" controls="" autoplay>
-                <source src="https://ia801502.us.archive.org/5/items/051.AdisBloggerHolaGithub/051.%20Adi%C3%B3s%20Blogger,%20Hola%20Github%20.mp3">
+            <a href="#" id="left" onclick="return false" title="Anterior">
+                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+            </a>
+            <audio id="audio" preload="auto" tabindex="0" controls="">
+                <source src="">
             </audio>
-            <a href="#" id="right" onclick="return false" title="Siguiente"></a>
+            <a href="#" id="right" onclick="return false" title="Siguiente">
+                <i class="fa fa-chevron-right" aria-hidden="true"></i>
+            </a>
         </div>
         <div id="playing">
             <span class="playingnow">Reproduciendo ahora...</span>
-            <span id="podcaster">uGeek</span>
-            <span id="episode">Title</span>
+            <span id="podcast"></span>
+            <span id="track"></span>
         </div>
     </div>
     <div class="panel">
         <ul id="playlist">
-
 '''
 HTML_END='''        </ul>
     </div>
@@ -331,16 +387,17 @@ class PodcastDB:
                     fhtml.write('<li class="active">\n')
                 else:
                     fhtml.write('<li>\n')
-                fhtml.write('<span id="item-{0}">\n'.format(index))
-                fhtml.write('<span class="logo {0}"></span>\n'.format(
+                fhtml.write('\t<span id="item-{0}">\n'.format(index))
+                fhtml.write('\t\t<a href="{0}">\n'.format(row[2]))
+                fhtml.write('\t\t\t<span class="isplaying"></span>\n')
+                fhtml.write('\t\t\t<span class="logo {0}"></span>\n'.format(
                     row[0].replace(' ', '').lower()))
-                fhtml.write('<span class="title">{0}</span>\n'.format(
+                fhtml.write('\t\t\t<span class="podcast">{0}</span>\n'.format(
                     row[0]))
-                fhtml.write('<span class="mp3">\n')
-                fhtml.write('<a href="{1}">{0}</a>\n'.format(
-                    row[1], row[2]))
-                fhtml.write('</span>\n')
-                fhtml.write('</span>\n')
+                fhtml.write('\t\t\t<span class="track">{0}</span>\n'.format(
+                    row[1]))
+                fhtml.write('\t\t</a>\n')
+                fhtml.write('\t</span>\n')
                 fhtml.write('</li>\n')
             fhtml.write(HTML_END + '\n')
         except Exception as e:
