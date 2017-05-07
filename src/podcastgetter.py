@@ -27,8 +27,9 @@ PODCASTS = [
 HTML_START = '''<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>HTML5 Audio Player</title>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <script type="text/javascript" >
@@ -50,6 +51,7 @@ HTML_START = '''<!DOCTYPE html>
         current_track=playlist.find("#item-0");
         previous_track=playlist.find("#item-"+previous);
         runaudio(current_track, audio[0],false);
+        $("#panelplayer").height("50px");
         $("[id^=item-]").click(function(e){
             e.preventDefault();
             previous=current;
@@ -64,9 +66,11 @@ HTML_START = '''<!DOCTYPE html>
         });
         audio[0].addEventListener("pause",function(e){
             $("#playing").hide();
+            $("#panelplayer").height("50px");
         });
         audio[0].addEventListener("play",function(e){
             $("#playing").show();
+            $("#panelplayer").height("auto");
         });
     };
     function playnext(){
@@ -103,11 +107,7 @@ HTML_START = '''<!DOCTYPE html>
         podcast=$(item.find(".podcast"));
         $("#podcast").text(podcast.text());
         track=$(item.find(".track"));
-        if(track.text().length>33){
-            $("#track").text(track.text().substring(0,30)+"...");
-        }else{
-            $("#track").text(track.text());
-        }
+        $("#track").text(track.text());
         link=$(item.find('a'));
         player.src=link.attr("href");
         par=link.parent();
@@ -179,7 +179,6 @@ HTML_START = '''<!DOCTYPE html>
             box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
             box-sizing: border-box;
             display: block;
-            min-height: 70px;
             background-color: #fff;
             padding: 10px;
             margin: 0 auto;
@@ -196,13 +195,13 @@ HTML_START = '''<!DOCTYPE html>
         }
         li {
             list-style-type: none;
-            height:70px;
+            height:60px;
         }
         span[id^="item-"]{
             height:48px;
             line-height: 20px;
             display: block;
-            }
+        }
         .isplaying{
             float:left;
             margin-top:12px;
@@ -221,25 +220,18 @@ HTML_START = '''<!DOCTYPE html>
             font-size: 16px;
             font-weight: 400;
             color:rgba(0,0,0,.87);
-            }
+        }
         .track, #track{
             display: block;
             font-size: 14px;
             font-weight: normal;
             color:rgba(0,0,0,.54);
-        }
-        #track{
+            width: 200px;
+            white-space: nowrap;
+            overflow: hidden;
             text-overflow: ellipsis;
-            display: -webkit-box;
-           -webkit-box-orient: vertical;
-           -webkit-line-clamp: 2;
         }
         #player{
-            height:80px;
-            float:left;
-        }
-        #playing{
-            height:80px;
             float:left;
         }
         .playingnow{
@@ -258,12 +250,56 @@ HTML_START = '''<!DOCTYPE html>
             .panel{
                 width:600px;
             }
-
+        }
+        @media only screen and (max-width: 319px) {
+            #player{
+                float:none;
+            }
+            audio{
+                width:120px;
+            }
+            .track,#track{
+                width:150px;
+            }
+            .panel, #player{
+                height: auto;
+                min-height:50px;
+            }
+            #playing{
+                display:inline-block;
+            }
+        }
+        @media only screen and (min-width: 320px) and (max-width: 499px) {
+            .track{
+                width:70%;
+            }
+            #track{
+                width:280px;
+            }
+            #playing{
+                display:inline-block;
+            }
+        }
+        @media only screen and (min-width: 500px) {
+            .track{
+                width:80%;
+            }
+            #track{
+                width:35%;
+            }
+            #playing{
+                display:block;
+            }
+        }
+        @media only screen and (min-width: 600px) {
+            #track{
+                width:50%;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="panel">
+    <div class="panel" id="panelplayer">
         <div id="player">
             <a href="#" id="left" onclick="return false" title="Anterior">
                 <i class="fa fa-chevron-left" aria-hidden="true"></i>
@@ -388,7 +424,8 @@ class PodcastDB:
                 else:
                     fhtml.write('<li>\n')
                 fhtml.write('\t<span id="item-{0}">\n'.format(index))
-                fhtml.write('\t\t<a href="{0}">\n'.format(row[2]))
+                fhtml.write('\t\t<a href="{0}" title="{1}">\n'.format(row[2],
+                                                                      row[1]))
                 fhtml.write('\t\t\t<span class="isplaying"></span>\n')
                 fhtml.write('\t\t\t<span class="logo {0}"></span>\n'.format(
                     row[0].replace(' ', '').lower()))
