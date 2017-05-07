@@ -1,11 +1,11 @@
 # Podcast
 
 ## Ultimos podcasts
+* [Eduardo Collado - Podcast #27: IPv6 (primera parte)](https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/05/podcast-27-ipv6-primera-parte.mp3)
+* [uGeek - 052. ¿Jekyll o WordPress?](https://ia601506.us.archive.org/33/items/JekyllOWordpress/Jekyll%20o%20Wordpress.mp3)
 * [uGeek - 051. Adiós Blogger, Hola GitHub!](https://ia801502.us.archive.org/5/items/051.AdisBloggerHolaGithub/051.%20Adi%C3%B3s%20Blogger,%20Hola%20Github%20.mp3)
 * [uGeek - 050. Que ando haciendo, nuevas publicaciones y más...](https://ia801505.us.archive.org/9/items/050.QueAndoHaciendo/050.%20Que%20ando%20haciendo.mp3)
 * [Eduardo Collado - Podcast #26: Odoo y transformación digital](https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/05/podcast-26-odoo-y-transformacion.mp3)
-* [Salmorejo Geek - #119 Geekeando con Érika Betancor](http://www.ivoox.com/119-geekeando-erika-betancor_mf_18422071_feed_1.mp3)
-* [Salmorejo Geek - #118 Directo: Así están las cosas (Abril 2017)](http://www.ivoox.com/118-directo-asi-estan-cosas-abril-2017_mf_18412331_feed_1.mp3)
 
 ## Salmorejo Geek
 * [#119 Geekeando con Érika Betancor](http://www.ivoox.com/119-geekeando-erika-betancor_mf_18422071_feed_1.mp3)
@@ -66,6 +66,7 @@
 * [#00 Promo Podcast Linux](http://www.ivoox.com/00-promo-podcast-linux_mf_13383411_feed_1.mp3)
 
 ## uGeek
+* [052. ¿Jekyll o WordPress?](https://ia601506.us.archive.org/33/items/JekyllOWordpress/Jekyll%20o%20Wordpress.mp3)
 * [051. Adiós Blogger, Hola GitHub!](https://ia801502.us.archive.org/5/items/051.AdisBloggerHolaGithub/051.%20Adi%C3%B3s%20Blogger,%20Hola%20Github%20.mp3)
 * [050. Que ando haciendo, nuevas publicaciones y más...](https://ia801505.us.archive.org/9/items/050.QueAndoHaciendo/050.%20Que%20ando%20haciendo.mp3)
 * [049. Instalar Syncthing en Ubuntu (derivadas de Debian), Antergos o Raspberry Pi](https://ia601503.us.archive.org/0/items/049.Syncthing/049.%20Syncthing.mp3)
@@ -131,6 +132,7 @@
 * [001. Hola Mundo](https://ia801602.us.archive.org/21/items/HolaMundo_201701/Hola%20Mundo.mp3)
 
 ## Eduardo Collado
+* [Podcast #27: IPv6 (primera parte)](https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/05/podcast-27-ipv6-primera-parte.mp3)
 * [Podcast #26: Odoo y transformación digital](https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/05/podcast-26-odoo-y-transformacion.mp3)
 * [Podcast #25: Introducción a Docker](https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/04/podcast-25-introduccion-a-docker.mp3)
 * [Podcast #24: Sobre Vlans](https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/04/podcast-24-sobre-vlans.mp3)
