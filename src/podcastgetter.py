@@ -488,33 +488,34 @@ def create_favorite_podcasts(csvfilename):
     csvreader = csv.reader(csvfile, delimiter='|')
     for index, row in enumerate(rows):
         print('---', index, '---')
-        feed, track_title, track_url = row
-        r = requests.get(feed, timeout=5, verify=False)
-        if r.status_code == 200:
-            d = feedparser.parse(r.text)
-            podcast_title = d.feed.title
-            podcast_image_url = d.feed.image.url
-            podcast_class = normalize_class(podcast_title)
-            if podcast_class not in podcast_classes:
-                styles.append(STYLE % (
-                    podcast_class, create_base64(podcast_image_url)))
-                podcast_classes.append(podcast_class)
-            if index == 0:
-                medium.append('<li class="active">\n')
-            else:
-                medium.append('<li>\n')
-            medium.append('\t<span id="item-{0}">\n'.format(index))
-            medium.append('\t\t<a href="{0}" title="{1}">\n'.format(
-                track_url, track_title))
-            medium.append('\t\t\t<span class="isplaying"></span>\n')
-            medium.append('\t\t\t<span class="logo {0}"></span>\n'.format(
-                podcast_class))
-            medium.append('\t\t\t<span class="podcast">{0}</span>\n'.format(podcast_title))
-            medium.append('\t\t\t<span class="track">{0}</span>\n'.format(
-                track_title))
-            medium.append('\t\t</a>\n')
-            medium.append('\t</span>\n')
-            medium.append('</li>\n')
+        if len(row) == 3:
+            feed, track_title, track_url = row
+            r = requests.get(feed, timeout=5, verify=False)
+            if r.status_code == 200:
+                d = feedparser.parse(r.text)
+                podcast_title = d.feed.title
+                podcast_image_url = d.feed.image.url
+                podcast_class = normalize_class(podcast_title)
+                if podcast_class not in podcast_classes:
+                    styles.append(STYLE % (
+                        podcast_class, create_base64(podcast_image_url)))
+                    podcast_classes.append(podcast_class)
+                if index == 0:
+                    medium.append('<li class="active">\n')
+                else:
+                    medium.append('<li>\n')
+                medium.append('\t<span id="item-{0}">\n'.format(index))
+                medium.append('\t\t<a href="{0}" title="{1}">\n'.format(
+                    track_url, track_title))
+                medium.append('\t\t\t<span class="isplaying"></span>\n')
+                medium.append('\t\t\t<span class="logo {0}"></span>\n'.format(
+                    podcast_class))
+                medium.append('\t\t\t<span class="podcast">{0}</span>\n'.format(podcast_title))
+                medium.append('\t\t\t<span class="track">{0}</span>\n'.format(
+                    track_title))
+                medium.append('\t\t</a>\n')
+                medium.append('\t</span>\n')
+                medium.append('</li>\n')
     html = HTML.replace('$$STYLES$$', ''.join(styles) + '\n')
     html = html.replace('$$PLAYLIST$$', ''.join(medium) + '\n')
     fhtml = open('podcasts_favoritos.html', 'w')

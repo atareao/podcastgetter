@@ -1,0 +1,1893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script type="text/javascript" >
+    var audio;
+    var playlist;
+    var tracks;
+    var current;
+    var previous;
+    var current_track;
+    var previous_track;
+    var ntracks;
+    function initaudio(){
+        audio=$("audio");
+        playlist=$("#playlist");
+        ntracks=$("[id^=item-]").length
+        audio[0].volume=1;
+        current=0;
+        previous=ntracks-1;
+        current_track=playlist.find("#item-0");
+        previous_track=playlist.find("#item-"+previous);
+        runaudio(current_track, audio[0],false);
+        $("#panelplayer").height("50px");
+        $("[id^=item-]").click(function(e){
+            e.preventDefault();
+            previous=current;
+            previous_track=current_track;
+            remove_play(previous_track);
+            current_track=$(this);
+            current=current_track.parent().index();
+            runaudio(current_track, audio[0]);
+        });
+        audio[0].addEventListener("ended",function(e){
+            playnext();
+        });
+        audio[0].addEventListener("pause",function(e){
+            $("#playing").hide();
+            $("#panelplayer").height("50px");
+        });
+        audio[0].addEventListener("play",function(e){
+            $("#playing").show();
+            $("#panelplayer").height("auto");
+        });
+    };
+    function playnext(){
+        previous=current;
+        previous_track=current_track;
+        remove_play(previous_track);
+        current++;
+        current_track=playlist.find("#item-"+current);
+        if(current_track.length==0){
+            current=0;
+            current_track=playlist.find("#item-0");
+        }
+        runaudio($(current_track),audio[0]);
+    }
+    function playprevious(){
+        previous=current;
+        previous_track=current_track;
+        remove_play(previous_track);
+        current--;
+        current_track=playlist.find("#item-"+current);
+        if(current<0){
+            current=ntracks-1;
+        }
+        current_track=playlist.find("#item-"+current);
+        runaudio($(current_track),audio[0]);
+    }
+    function remove_play(item){
+        isp=$(item.find(".isplaying"));
+        isp.html("");
+    }
+    function runaudio(item, player,play=true){
+        isp=$(item.find(".isplaying"))
+        isp.html("<i class='fa fa-play' aria-hidden='true'></i>");
+        podcast=$(item.find(".podcast"));
+        $("#podcast").text(podcast.text());
+        track=$(item.find(".track"));
+        $("#track").text(track.text());
+        link=$(item.find('a'));
+        player.src=link.attr("href");
+        par=link.parent();
+        par.addClass("active").siblings().removeClass("active");
+        audio[0].load();
+        if(play==true){
+            console.log(play);
+            audio[0].play();
+        }
+    }
+    $(document).ready(function(){ 
+        console.log($("[id^=item-]").length);
+        $("#right").bind("click", function(e) {
+            playnext();
+        });
+        $("#left").bind("click", function(e) {
+            playprevious();
+        });
+        $("#playing").hide();
+        initaudio();
+    });
+    </script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <style>
+        #left{
+            margin-top: 7px;
+            float: left;
+            width: 16px;
+            height: 32px;
+            cursor:hand;
+        }
+        #right{
+            margin-top: 7px;
+            float:left;
+            width: 16px;
+            height: 32px;
+            cursor:hand;
+        }
+        .podcastdeeduardocollado{
+	background: url('data:image/png;base64,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');
+
+	background-size: 48px 48px;
+}
+.ugeek{
+	background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAIHUlEQVR4nO2ZWYidZxnHf8/7LWedM2smkzR2Upu0mSBSahfbRrS1C4hiES8UEVoQEYp1ufFOwQvvpRdeWkHBBS1FK1ioFlosLd1oa2tIbbZJk8xktrN+2/s+XnznZNJkzpkz09AQ6B8GPuZb3uf/Ptv/eY9895ZfKVcxzJU24MPiYwJXGlc9AX/QTQFEPiJL+sBtUmL6EjACiVPiTDFXiIWilD2DAP14bEjACHSssrPg8dmpEruK3kcca0KqypFGwgtLEZkqvsiGJC4hIAKRVT5ZCfjhDePUyt1HPupuIXDXTIXbJjo89u4qVvOQvhiXeqD74Dc/MUKt6PHymTavrkb4G4SRCOgAYsp6lXBsbEC/9zyBe6fLHJwscU894clTTUYCc0lOfICAAKkqOwoeeysBzcjy+LE1lhJHYNadIAhOldgpngiB6UXphdEq+fecokBoBB3SjUagmSrNzPHIaMjcSMhTRjbcrEs8oJovFhioZ/mSY6FBdb0iWQVfhOurIfXUcjayGBEyB74RBCFTxSrsrwYYgfdaKaEZnJAXEvBQIqdI155+Objh/9f3cN1gI3lJU4WiER7aW2PfSMC9O8vMFH06VpkqeERWaVvHZMEjso59IwHXV0MSpwRGyDT/zmZ/F8b8IMID+0C+G0JiHd+YHeHvp9vcNFZgXzXgZDvjT/NNPjdVQoEHd1epFAzzzZSOVW4cLVCPLZFzTIWGh2ZrPH22TTtzfSvKdjB0dRwLDJFVQiPsKHicjS1GYLbi86P9Y+wbCZhvptwyXuQruyucaqVMFzxmij73TJd5filivpMRmMtn/NAErCodq9w8UWBPyefZxQ6HJkscqIWg8PpanIeIZ3irnnA2soyFhmPt3BuvrsZ8cbrMnpJP6nToajQMNg0h1Tx2n3y/xaEdJd5Yi3n+XIeF2HLzeJHV2PLnU00O1kKur4UcXkt4aTnijqki9dRxvJ2xllrGA4/RwGMhtvgDGAjDl9vhCACBCMuJ448nGngijASGw42E/6zFAHgivLwc89JyxIhvCIzw11MtAAKTV6yFyCICJc/gVD+gs3oVToDEgTC8lzYl0CPhC4wEecQ5hZIR1AihEe6fKVP2DW+uxry2GtO2eaKWPWElcewsGr60p8pvTzSIU4tvBE8g6uqsghESqyROmS37VHzDO/Wk20kuA4EeiQsbiZKLvamCx7Vln8ePNXh4b43lxPHpsZAzHcuLyxF3T5fZVwsoiVD1DPfvKXO0kbIQW26dLLKWWN6uJ3xqNKSVKXO1kB2hx8/ry0PZ9aE0mgCZ5ldztZBW5vjyrgoriWOuFvLt2RH2VnyOtzIU+NqeKq1MSVT5+p4q8+2M2yeK3L2jzJ2TJazCauJYjC06SKNcLgI9lI3gCzxxqknBE55daHOinfKZ8SLv1BNeONchEGEiMDxzpsXJdkZohKfPtFiILe+2Ep5ZaDNXyxveUmLJ+oi3izF0CPWDAY62U/5xpk1ghFdXIr5/wzidzPHYkVXumylzaLrMSpRxpJnyyI3jvL4U8d9Gwk/mJpgIDNMFn/GCR9EIDsVpniPDYKgqtJEzFfCMcC6xPHGqxVhgUODZxQ5v1xOamaORKYsnGpQ8oZE6Iqe810qJnbKWOnYWPFpWiWwuINdSR+KUogdFY3BDtLyBBHqyFga7U9HzzwW+YS11eJJ370yVeprfr3bvGfLr1dRhBAoGlhN7/hog9Da1vT8BIRdTo77hZwcnu+Ws325cLLkknxOAng32/KuKyLos7j2HXjRbSN5ADQJ2cE8Y6AFPYKrgsbXeuG5sI3X4Rih526sVdrOJngEEPIGl2PHLIyuIDKPi16EKgREemKmwEGX8eykiNMN/QQRiC7Nln+/dML41AvlUlrs99ITTUcZqOrwEzuWAck3J57apIofXYn59rN6dyIaDJ9BIHdMFg5p8SnTDEFDynVuMM060M64bDXl47yivrEYEQxDo6RtVyFR5+nSLeur4wnSJ0OQB38+Qi+3wBR7YWUEQDjcSMqeId+lYueGphHPw+5N1flAa587dFe7cVRliWXLLe+ObEbAu/2DvGrplbficOrIc8czZNmX/0oF+QwJOoegJhxspv3h7mbumSswUvYFL5sM7TBY8rq0GLLZS5tsZBS8f/p3CgVpIIMI7K3G+m5twSBXebSY8t9ghdto3AjZMYqdQ8oT3Oxm/O17H22Q1T6CZOR7dP8514wX+ebzNX+ab1MJ81xKn/HRughsnivxroc1z5zpU++zo+R1RcKqUfDMwfPtWIdc9DShs0tN7Gn5fNeTWiSI2thxuJIyGhoLJe4JLlTfWEg5Mlrh/Z5nXVmPKnuQEBn4+f2ZQ7g0s0Er/U4Oe8QCRdXx1d4VC0eP1lZgT7YyiJ+cleMkzvLgc0epkHBgvcsdkkZXUcWF7GLTOIGyrwzilq3UcK4njwWuq3D5dZrGZ8vjxOh2r1FNHI3XUU0dkHUdbKb85Vidzyrdma8yNhJyLLc3M0c62P+ZvWY068vw4NFUGYFfJ576dZTLreK+RcNNYgVI3PD4QHd3T7jOtlGsqAY/uH+Op0y0UWIotb64lmG00fNnKj3ymm6yfnyrznYMT6yKnVyJ75XMQrK4Pwd76IPzj1xaob+PMaEsecJrL3LfqMX87usaInx859vJc2bxRGdZPUK3mkvx/jYRGlp+zbjWYthxCRqCVKX842djqq30hCKVhJ5iLsK2JzHS1/eXEMBVnI2x7pNzugpcbV/2vlB8TuNL4mMCVxlVP4P/qENRUankzQAAAAABJRU5ErkJggg==');
+
+	background-size: 48px 48px;
+}
+.salmorejogeek{
+	background: url('data:image/png;base64,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');
+
+	background-size: 48px 48px;
+}
+.compilandopodcast{
+	background: url('data:image/png;base64,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');
+
+	background-size: 48px 48px;
+}
+.mosqueterowebtecnologialinuxajedrez{
+	background: url('data:image/png;base64,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');
+
+	background-size: 48px 48px;
+}
+.podcastlinux{
+	background: url('data:image/png;base64,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');
+
+	background-size: 48px 48px;
+}
+
+
+        body{
+            background-color: rgb(247, 247, 247);
+            font-family: "Roboto", sans-serif;
+        }
+        .panel{
+            webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
+            -moz-box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
+            box-sizing: border-box;
+            display: block;
+            background-color: #fff;
+            padding: 10px;
+            margin: 0 auto;
+            margin-bottom: 20px;
+        }
+        audio {
+            width:250px; /* Ancho del reproductor */
+            display: block;
+            float:left;
+        }
+        ul {
+          list-style-type: none;
+          padding-left: 0px;
+        }
+        li {
+            list-style-type: none;
+            height:60px;
+        }
+        span[id^="item-"]{
+            height:48px;
+            line-height: 20px;
+            display: block;
+        }
+        .isplaying{
+            float:left;
+            margin-top:12px;
+            width:24px;
+            height:24px;
+            margin-right: 5px;
+        }
+        .logo{
+            float:left;
+            width:48px;
+            height:48px;
+            margin-right: 5px;
+            background-size: 48px 48px;
+            background-repeat: no-repeat;
+        }
+        .podcast, #podcast{
+            display: block;
+            font-size: 16px;
+            font-weight: 400;
+            color:rgba(0,0,0,.87);
+        }
+        .track, #track{
+            display: block;
+            font-size: 14px;
+            font-weight: normal;
+            color:rgba(0,0,0,.54);
+            width: 200px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        #player{
+            float:left;
+        }
+        .playingnow{
+            font-size: 12px;
+            color: #9E9E9E;
+        }
+        a{
+            text-decoration:none;
+            color:rgba(0,0,0,.54);
+        }
+        a:visited{
+            text-decoration: none;
+            color:rgba(0,0,0,.54);
+        }
+        @media only screen and (min-width: 700px) {
+            .panel{
+                width:600px;
+            }
+        }
+        @media only screen and (max-width: 319px) {
+            #player{
+                float:none;
+            }
+            audio{
+                width:120px;
+            }
+            .track,#track{
+                width:150px;
+            }
+            .panel, #player{
+                height: auto;
+                min-height:50px;
+            }
+            #playing{
+                display:inline-block;
+            }
+        }
+        @media only screen and (min-width: 320px) and (max-width: 499px) {
+            .track{
+                width:70%;
+            }
+            #track{
+                width:280px;
+            }
+            #playing{
+                display:inline-block;
+            }
+        }
+        @media only screen and (min-width: 500px) {
+            .track{
+                width:80%;
+            }
+            #track{
+                width:35%;
+            }
+            #playing{
+                display:block;
+            }
+        }
+        @media only screen and (min-width: 600px) {
+            #track{
+                width:50%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="panel" id="panelplayer">
+        <div id="player">
+            <a href="#" id="left" onclick="return false" title="Anterior">
+                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+            </a>
+            <audio id="audio" preload="auto" tabindex="0" controls="">
+                <source src="">
+            </audio>
+            <a href="#" id="right" onclick="return false" title="Siguiente">
+                <i class="fa fa-chevron-right" aria-hidden="true"></i>
+            </a>
+        </div>
+        <div id="playing">
+            <span class="playingnow">Reproduciendo ahora...</span>
+            <span id="podcast"></span>
+            <span id="track"></span>
+        </div>
+    </div>
+    <div class="panel">
+        <ul id="playlist">
+        <li class="active">
+	<span id="item-0">
+		<a href="https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/05/podcast-27-ipv6-primera-parte.mp3" title="Podcast #27: IPv6 (primera parte)">
+			<span class="isplaying"></span>
+			<span class="logo podcastdeeduardocollado"></span>
+			<span class="podcast">Podcast de Eduardo Collado</span>
+			<span class="track">Podcast #27: IPv6 (primera parte)</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-1">
+		<a href="https://ia601506.us.archive.org/33/items/JekyllOWordpress/Jekyll%20o%20Wordpress.mp3" title="052. ¿Jekyll o WordPress?">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">052. ¿Jekyll o WordPress?</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-2">
+		<a href="https://ia801502.us.archive.org/5/items/051.AdisBloggerHolaGithub/051.%20Adi%C3%B3s%20Blogger,%20Hola%20Github%20.mp3" title="051. Adiós Blogger, Hola GitHub!">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">051. Adiós Blogger, Hola GitHub!</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-3">
+		<a href="https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/05/podcast-26-odoo-y-transformacion.mp3" title="Podcast #26: Odoo y transformación digital">
+			<span class="isplaying"></span>
+			<span class="logo podcastdeeduardocollado"></span>
+			<span class="podcast">Podcast de Eduardo Collado</span>
+			<span class="track">Podcast #26: Odoo y transformación digital</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-4">
+		<a href="http://www.ivoox.com/119-geekeando-erika-betancor_mf_18422071_feed_1.mp3" title="#119 Geekeando con Érika Betancor">
+			<span class="isplaying"></span>
+			<span class="logo salmorejogeek"></span>
+			<span class="podcast">Salmorejo Geek</span>
+			<span class="track">#119 Geekeando con Érika Betancor</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-5">
+		<a href="https://ia801505.us.archive.org/9/items/050.QueAndoHaciendo/050.%20Que%20ando%20haciendo.mp3" title="050. Que ando haciendo, nuevas publicaciones y más...">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">050. Que ando haciendo, nuevas publicaciones y más...</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-6">
+		<a href="http://www.ivoox.com/118-directo-asi-estan-cosas-abril-2017_mf_18412331_feed_1.mp3" title="#118 Directo: Así están las cosas (Abril 2017)">
+			<span class="isplaying"></span>
+			<span class="logo salmorejogeek"></span>
+			<span class="podcast">Salmorejo Geek</span>
+			<span class="track">#118 Directo: Así están las cosas (Abril 2017)</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-7">
+		<a href="https://ia601503.us.archive.org/0/items/049.Syncthing/049.%20Syncthing.mp3" title="049. Instalando Syncthing en Ubuntu, Antergos y Raspberry Pi">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">049. Instalando Syncthing en Ubuntu, Antergos y Raspberry Pi</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-8">
+		<a href="http://compilando.audio/wp-content/uploads/2017/04/podcast4.mp3" title="Podcast 4 – Jon “maddog” Hall , Open South Code y Linux y Tapas">
+			<span class="isplaying"></span>
+			<span class="logo compilandopodcast"></span>
+			<span class="podcast">Compilando Podcast</span>
+			<span class="track">Podcast 4 – Jon “maddog” Hall , Open South Code y Linux y Tapas</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-9">
+		<a href="https://ia601503.us.archive.org/28/items/EncuentroDeAmiguetes/Encuentro%20de%20amiguetes.mp3" title="048. Encuentro de amiguetes">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">048. Encuentro de amiguetes</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-10">
+		<a href="https://www.ivoox.com/twitter-sabemos-usarlo-android-audio-pocket-casts_mf_18349090_feed_1.mp3" title="Twitter, ¿sabemos usarlo? Android Audio y Pocket Casts">
+			<span class="isplaying"></span>
+			<span class="logo mosqueterowebtecnologialinuxajedrez"></span>
+			<span class="podcast">Mosqueteroweb tecnologia, Linux, ajedrez, ...</span>
+			<span class="track">Twitter, ¿sabemos usarlo? Android Audio y Pocket Casts</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-11">
+		<a href="http://www.ivoox.com/23-la-terminal_mf_18347303_feed_1.mp3" title="#23 La Terminal">
+			<span class="isplaying"></span>
+			<span class="logo podcastlinux"></span>
+			<span class="podcast">Podcast Linux</span>
+			<span class="track">#23 La Terminal</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-12">
+		<a href="https://ia801500.us.archive.org/21/items/SeEstropeaLaSDDeMiRasberry/Se%20estropea%20la%20SD%20de%20mi%20rasberry.mp3" title="047. Se quemó la SD. Comparación de consumos entre PC, NAS-Microserver, Raspberry Pi">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">047. Se quemó la SD. Comparación de consumos entre PC, NAS-Microserver, Raspberry Pi</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-13">
+		<a href="http://www.ivoox.com/117-sin-sombra-helicoptero_mf_18309317_feed_1.mp3" title="#117 Sin sombra en el helicóptero">
+			<span class="isplaying"></span>
+			<span class="logo salmorejogeek"></span>
+			<span class="podcast">Salmorejo Geek</span>
+			<span class="track">#117 Sin sombra en el helicóptero</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-14">
+		<a href="http://www.ivoox.com/116-conociendo-deepin-gnu-linux-15-4_mf_18295101_feed_1.mp3" title="#116 Conociendo Deepin GNU Linux 15.4">
+			<span class="isplaying"></span>
+			<span class="logo salmorejogeek"></span>
+			<span class="podcast">Salmorejo Geek</span>
+			<span class="track">#116 Conociendo Deepin GNU Linux 15.4</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-15">
+		<a href="https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/04/podcast-25-introduccion-a-docker.mp3" title="Podcast #25: Introducción a Docker">
+			<span class="isplaying"></span>
+			<span class="logo podcastdeeduardocollado"></span>
+			<span class="podcast">Podcast de Eduardo Collado</span>
+			<span class="track">Podcast #25: Introducción a Docker</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-16">
+		<a href="https://ia601509.us.archive.org/6/items/046SyncthingResilioYDukto/%23046%20Syncthing%2c%20Resilio%20y%20Dukto%20.mp3" title="046. Sincronización de carpetas entre dispositivos. Syncthing, Resilio y Dukto">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">046. Sincronización de carpetas entre dispositivos. Syncthing, Resilio y Dukto</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-17">
+		<a href="https://ia801502.us.archive.org/1/items/041UbuntuYElAdiosAUnity/%23041%20Ubuntu%20y%20el%20adi%c3%b3s%20a%20Unity.mp3" title="041. Ubuntu y el adios de Unity">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">041. Ubuntu y el adios de Unity</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-18">
+		<a href="https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/04/podcast-24-sobre-vlans.mp3" title="Podcast #24: Sobre Vlans">
+			<span class="isplaying"></span>
+			<span class="logo podcastdeeduardocollado"></span>
+			<span class="podcast">Podcast de Eduardo Collado</span>
+			<span class="track">Podcast #24: Sobre Vlans</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-19">
+		<a href="https://www.ivoox.com/seguridad-hardware-tu-servidor-casero_mf_18128440_feed_1.mp3" title="Seguridad por Hardware en tu Servidor casero">
+			<span class="isplaying"></span>
+			<span class="logo mosqueterowebtecnologialinuxajedrez"></span>
+			<span class="podcast">Mosqueteroweb tecnologia, Linux, ajedrez, ...</span>
+			<span class="track">Seguridad por Hardware en tu Servidor casero</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-20">
+		<a href="http://www.ivoox.com/115-crossover-ugeek-podcast-mastodon-ubuntu-y_mf_18112915_feed_1.mp3" title="#115 Crossover con uGeek Podcast: Mastodon, Ubuntu y comunidad Linux, Telegram y mucho más">
+			<span class="isplaying"></span>
+			<span class="logo salmorejogeek"></span>
+			<span class="podcast">Salmorejo Geek</span>
+			<span class="track">#115 Crossover con uGeek Podcast: Mastodon, Ubuntu y comunidad Linux, Telegram y mucho más</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-21">
+		<a href="http://www.ivoox.com/22-linux-connexion-osl-la_mf_18133189_feed_1.mp3" title="#22 Linux Connexion con la OSL de la Universidad de La Laguna">
+			<span class="isplaying"></span>
+			<span class="logo podcastlinux"></span>
+			<span class="podcast">Podcast Linux</span>
+			<span class="track">#22 Linux Connexion con la OSL de la Universidad de La Laguna</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-22">
+		<a href="https://ia801505.us.archive.org/27/items/045CrossoverConSalmorejoGeek/%23045%20Crossover%20con%20Salmorejo%20Geek.mp3" title="045. Crossover con Salmorejo Geek, donde hablamos de Mastodon, Ubuntu, Telegram y mucho mas...">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">045. Crossover con Salmorejo Geek, donde hablamos de Mastodon, Ubuntu, Telegram y mucho mas...</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-23">
+		<a href="https://ia801504.us.archive.org/22/items/044WebDeJekyllEnGithub/%23044%20Web%20de%20Jekyll%20en%20Github.mp3" title="044. La web de Jekyll en GitHub, va tomando forma">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">044. La web de Jekyll en GitHub, va tomando forma</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-24">
+		<a href="http://www.ivoox.com/114-ubuntu-abandona-unity-convergencia-y_mf_18057325_feed_1.mp3" title="#114 Ubuntu abandona Unity y la Convergencia ¿Y ahora qué?">
+			<span class="isplaying"></span>
+			<span class="logo salmorejogeek"></span>
+			<span class="podcast">Salmorejo Geek</span>
+			<span class="track">#114 Ubuntu abandona Unity y la Convergencia ¿Y ahora qué?</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-25">
+		<a href="https://ia601509.us.archive.org/23/items/043BotDeTelegramDeIFTTT/%23043%20Bot%20de%20Telegram%20de%20IFTTT.mp3" title="043. Bot de Telegram IFTTT">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">043. Bot de Telegram IFTTT</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-26">
+		<a href="https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/04/podcast-23-calcular-mascaras-de-red.mp3" title="Podcast #23: Calcular máscaras de red">
+			<span class="isplaying"></span>
+			<span class="logo podcastdeeduardocollado"></span>
+			<span class="podcast">Podcast de Eduardo Collado</span>
+			<span class="track">Podcast #23: Calcular máscaras de red</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-27">
+		<a href="https://www.ivoox.com/que-pasa-ubuntu-hablando-linux-con_mf_18041732_feed_1.mp3" title="¿Qué pasa con Ubuntu? Hablando de Linux con El Atareao y con uGeek">
+			<span class="isplaying"></span>
+			<span class="logo mosqueterowebtecnologialinuxajedrez"></span>
+			<span class="podcast">Mosqueteroweb tecnologia, Linux, ajedrez, ...</span>
+			<span class="track">¿Qué pasa con Ubuntu? Hablando de Linux con El Atareao y con uGeek</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-28">
+		<a href="https://ia601502.us.archive.org/25/items/042ElAtareaoVisitaElCrossoverDeLaSemana/%23042%20El%20Atareao%20visita%20el%20Crossover%20de%20la%20Semana.mp3" title="042. El Atareao visita el Crossover de la Semana">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">042. El Atareao visita el Crossover de la Semana</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-29">
+		<a href="https://compilando.audio/wp-content/uploads/2017/04/Podcast_3.mp3" title="Podcast 3 – Entrevista con ” el atareao” y el nuevo rumbo de Ubuntu">
+			<span class="isplaying"></span>
+			<span class="logo compilandopodcast"></span>
+			<span class="podcast">Compilando Podcast</span>
+			<span class="track">Podcast 3 – Entrevista con ” el atareao” y el nuevo rumbo de Ubuntu</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-30">
+		<a href="https://ia801504.us.archive.org/29/items/40AntergosOCNewsDeNextcloudYJekyll/%2340%20Antergos%2c%20OCNews%20de%20Nextcloud%20y%20Jekyll%20.mp3" title="040. Antergos, Ocnews De Nextcloud Y Jekyll">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">040. Antergos, Ocnews De Nextcloud Y Jekyll</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-31">
+		<a href="https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/04/podcast-22-iptables-en-gnu-linux.mp3" title="Podcast #22: NAT en GNU/Linux">
+			<span class="isplaying"></span>
+			<span class="logo podcastdeeduardocollado"></span>
+			<span class="podcast">Podcast de Eduardo Collado</span>
+			<span class="track">Podcast #22: NAT en GNU/Linux</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-32">
+		<a href="http://www.ivoox.com/113-offtopiqueando-ando-informatica-semana-santa-chuck_mf_17909300_feed_1.mp3" title="#113 Offtopiqueando ando: Informática, Semana Santa y Chuck Norris">
+			<span class="isplaying"></span>
+			<span class="logo salmorejogeek"></span>
+			<span class="podcast">Salmorejo Geek</span>
+			<span class="track">#113 Offtopiqueando ando: Informática, Semana Santa y Chuck Norris</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-33">
+		<a href="https://ia601508.us.archive.org/2/items/039TelegramNotes/%23039%20Telegram%2c%20Notes.mp3" title="039. Aplicación Notes de Nextcloud y crea tus bots de Telegram">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">039. Aplicación Notes de Nextcloud y crea tus bots de Telegram</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-34">
+		<a href="https://compilando.audio/wp-content/uploads/2017/04/CompilandoPodcast2.mp3" title="Podcast 2 – Especial Servidores Privados">
+			<span class="isplaying"></span>
+			<span class="logo compilandopodcast"></span>
+			<span class="podcast">Compilando Podcast</span>
+			<span class="track">Podcast 2 – Especial Servidores Privados</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-35">
+		<a href="https://compilando.audio/wp-content/uploads/2017/04/podcast_1.mp3" title="Podcast 1- Ian Murdock, Debian y el proyecto QSL">
+			<span class="isplaying"></span>
+			<span class="logo compilandopodcast"></span>
+			<span class="podcast">Compilando Podcast</span>
+			<span class="track">Podcast 1- Ian Murdock, Debian y el proyecto QSL</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-36">
+		<a href="https://www.ivoox.com/virtualizacion-ugeek-mosqueteroweb-face-to-face_mf_17898640_feed_1.mp3" title="Virtualizacion. uGeek y Mosqueteroweb. Face to Face.">
+			<span class="isplaying"></span>
+			<span class="logo mosqueterowebtecnologialinuxajedrez"></span>
+			<span class="podcast">Mosqueteroweb tecnologia, Linux, ajedrez, ...</span>
+			<span class="track">Virtualizacion. uGeek y Mosqueteroweb. Face to Face.</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-37">
+		<a href="https://archive.org/download/PODCAST0_201704/PODCAST_0.mp3" title="Podcast 0 – Edición de presentación. Stallman y el síndrome Mi Pueblex.">
+			<span class="isplaying"></span>
+			<span class="logo compilandopodcast"></span>
+			<span class="podcast">Compilando Podcast</span>
+			<span class="track">Podcast 0 – Edición de presentación. Stallman y el síndrome Mi Pueblex.</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-38">
+		<a href="https://ia601506.us.archive.org/26/items/38CrossoverConMosqueteroWeb/%23%2038%20Crossover%20con%20MosqueteroWeb.mp3" title="038. Crossover con MosqueteroWeb. Masterclass de FreeNas, Docker y virtualización mediante Proxmox y Esxi.">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">038. Crossover con MosqueteroWeb. Masterclass de FreeNas, Docker y virtualización mediante Proxmox y Esxi.</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-39">
+		<a href="http://www.ivoox.com/112-llamadas-voz-telegram-cada-dia_mf_17886542_feed_1.mp3" title="#112 Llamadas de voz en Telegram, cada día mejor">
+			<span class="isplaying"></span>
+			<span class="logo salmorejogeek"></span>
+			<span class="podcast">Salmorejo Geek</span>
+			<span class="track">#112 Llamadas de voz en Telegram, cada día mejor</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-40">
+		<a href="https://ia801503.us.archive.org/18/items/037LlamadasDeTelegram/%23037%20Llamadas%20de%20Telegram.mp3" title="037. Llamadas de Telegram ya estan aquí. Y 3 bots que os encantaran">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">037. Llamadas de Telegram ya estan aquí. Y 3 bots que os encantaran</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-41">
+		<a href="https://ia601509.us.archive.org/25/items/036PodcastConFrank/%23036%20podcast%20con%20Frank.mp3" title="036. Podcast con Frank de Batería2x100, Servidores Linux y NAS, lo mismo pero  diferente">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">036. Podcast con Frank de Batería2x100, Servidores Linux y NAS, lo mismo pero  diferente</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-42">
+		<a href="https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/03/podcast-21-lets-encrypt.mp3" title="Podcast #21: Let’s Encrypt">
+			<span class="isplaying"></span>
+			<span class="logo podcastdeeduardocollado"></span>
+			<span class="podcast">Podcast de Eduardo Collado</span>
+			<span class="track">Podcast #21: Let’s Encrypt</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-43">
+		<a href="http://www.ivoox.com/21-gnu-linux-universidad_mf_17834272_feed_1.mp3" title="#21 GNU/Linux en la Universidad">
+			<span class="isplaying"></span>
+			<span class="logo podcastlinux"></span>
+			<span class="podcast">Podcast Linux</span>
+			<span class="track">#21 GNU/Linux en la Universidad</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-44">
+		<a href="https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/03/podcast-20-como-ganar-dinero-con-el-podcast.mp3" title="Podcast #20: Cómo ganar dinero con el podcast">
+			<span class="isplaying"></span>
+			<span class="logo podcastdeeduardocollado"></span>
+			<span class="podcast">Podcast de Eduardo Collado</span>
+			<span class="track">Podcast #20: Cómo ganar dinero con el podcast</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-45">
+		<a href="https://www.ivoox.com/freenas-servidor-hp-gen8-contenedores-y-maquinas_mf_17803755_feed_1.mp3" title="FreeNAS , Servidor HP Gen8, Contenedores Y Máquinas Virtuales">
+			<span class="isplaying"></span>
+			<span class="logo mosqueterowebtecnologialinuxajedrez"></span>
+			<span class="podcast">Mosqueteroweb tecnologia, Linux, ajedrez, ...</span>
+			<span class="track">FreeNAS , Servidor HP Gen8, Contenedores Y Máquinas Virtuales</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-46">
+		<a href="https://ia601501.us.archive.org/10/items/035MiG8/%23035%20Mi%20G8.mp3" title="035. Mi HP ProLiant MicroServer Gen8">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">035. Mi HP ProLiant MicroServer Gen8</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-47">
+		<a href="https://ia801500.us.archive.org/9/items/034BotDeTelegramSustitutoAShazam/%23034%20Bot%20de%20Telegram%20sustituto%20a%20Shazam.mp3" title="034. Bots de Telegram Sustitutos a Shazam y busqueda de articulos dentro del bot de Pocket">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">034. Bots de Telegram Sustitutos a Shazam y busqueda de articulos dentro del bot de Pocket</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-48">
+		<a href="https://www.ivoox.com/chromebooks-raspi-xiaomi-note-4-ultraportatil-jumper_mf_17764920_feed_1.mp3" title="Chromebooks, raspi, Xiaomi Note 4 y ultraportátil Jumper">
+			<span class="isplaying"></span>
+			<span class="logo mosqueterowebtecnologialinuxajedrez"></span>
+			<span class="podcast">Mosqueteroweb tecnologia, Linux, ajedrez, ...</span>
+			<span class="track">Chromebooks, raspi, Xiaomi Note 4 y ultraportátil Jumper</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-49">
+		<a href="https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/03/podcast-19-openvpn.mp3" title="Podcast #19: OpenVPN">
+			<span class="isplaying"></span>
+			<span class="logo podcastdeeduardocollado"></span>
+			<span class="podcast">Podcast de Eduardo Collado</span>
+			<span class="track">Podcast #19: OpenVPN</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-50">
+		<a href="https://ia601500.us.archive.org/4/items/033BotDePocketParaTelegram/%23033%20Bot%20de%20Pocket%20para%20Telegram.mp3" title="033. Bots en Telegram. Bot de Pocket">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">033. Bots en Telegram. Bot de Pocket</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-51">
+		<a href="https://ia601606.us.archive.org/30/items/032MiscelaneaDeViernes/%23032%20Miscel%C3%A1nea%20de%20Viernes.mp3" title="032. Miscelánea de Viernes">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">032. Miscelánea de Viernes</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-52">
+		<a href="https://ia601606.us.archive.org/14/items/031Keepass.ComoGestionoMisContrasenas/%23031%20Keepass.%20Como%20gestiono%20mis%20contrase%C3%B1as.mp3" title="031. Keepass, como gestiono mis contraseñas">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">031. Keepass, como gestiono mis contraseñas</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-53">
+		<a href="https://ia601609.us.archive.org/0/items/030Mumble/%23030%20Mumble.mp3" title="030. Mumble, VoIP de Software Libre. Nextcloud, Wallabag y kdenlive">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">030. Mumble, VoIP de Software Libre. Nextcloud, Wallabag y kdenlive</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-54">
+		<a href="http://www.ivoox.com/111-problemas-focusrite-scarlett-solo-y_mf_17626877_feed_1.mp3" title="#111 Problemas con la Focusrite Scarlett Solo y 2i2 en macOS Sierra">
+			<span class="isplaying"></span>
+			<span class="logo salmorejogeek"></span>
+			<span class="podcast">Salmorejo Geek</span>
+			<span class="track">#111 Problemas con la Focusrite Scarlett Solo y 2i2 en macOS Sierra</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-55">
+		<a href="https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/03/podcast-18-herramientas-simples-y-utiles-para-un-adminsitrador-de-red.mp3" title="Podcast #18: Herramientas simples y útiles para un adminsitrador de red">
+			<span class="isplaying"></span>
+			<span class="logo podcastdeeduardocollado"></span>
+			<span class="podcast">Podcast de Eduardo Collado</span>
+			<span class="track">Podcast #18: Herramientas simples y útiles para un adminsitrador de red</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-56">
+		<a href="https://ia601608.us.archive.org/28/items/029MiscelneaDeViernes/%23029%20Miscel%C3%A1nea%20de%20viernes.mp3" title="029. Miscelánea de Viernes.">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">029. Miscelánea de Viernes.</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-57">
+		<a href="https://ia601607.us.archive.org/17/items/ugeekpodcast_gmail_XMPP/XMPP.mp3" title="028. Instala un servidor de mensajeria tipo Whatsapp o Telegram y de Software Libre con XMPP/Jabber">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">028. Instala un servidor de mensajeria tipo Whatsapp o Telegram y de Software Libre con XMPP/Jabber</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-58">
+		<a href="http://www.ivoox.com/20-linux-connexion-david-montalva-lliurex_mf_17557164_feed_1.mp3" title="#20 Linux Connexion con David Montalva (Lliurex)">
+			<span class="isplaying"></span>
+			<span class="logo podcastlinux"></span>
+			<span class="podcast">Podcast Linux</span>
+			<span class="track">#20 Linux Connexion con David Montalva (Lliurex)</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-59">
+		<a href="http://www.ivoox.com/110-armando-nuevo-pc-para-linux_mf_17538251_feed_1.mp3" title="#110 Armando un nuevo PC para Linux">
+			<span class="isplaying"></span>
+			<span class="logo salmorejogeek"></span>
+			<span class="podcast">Salmorejo Geek</span>
+			<span class="track">#110 Armando un nuevo PC para Linux</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-60">
+		<a href="https://ia601606.us.archive.org/3/items/027InstalaTuVpnEnUbuntuORaspberryPi/%23027%20instala%20tu%20vpn%20en%20Ubuntu%20o%20Raspberry%20Pi.mp3" title="027. Instala una VPN (OpenVpn) en Ubuntu o Raspberry Pi con PiVpn">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">027. Instala una VPN (OpenVpn) en Ubuntu o Raspberry Pi con PiVpn</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-61">
+		<a href="https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/03/podcast-17-sistemas-de-monitorizacion-de-sistemas-y-red.mp3" title="Podcast #17: Sistemas de monitorización de sistemas y red">
+			<span class="isplaying"></span>
+			<span class="logo podcastdeeduardocollado"></span>
+			<span class="podcast">Podcast de Eduardo Collado</span>
+			<span class="track">Podcast #17: Sistemas de monitorización de sistemas y red</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-62">
+		<a href="https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/03/podcast-16-directo-11-marzo-2017.mp3" title="Podcast #16: Directo 11 de Marzo 2017">
+			<span class="isplaying"></span>
+			<span class="logo podcastdeeduardocollado"></span>
+			<span class="podcast">Podcast de Eduardo Collado</span>
+			<span class="track">Podcast #16: Directo 11 de Marzo 2017</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-63">
+		<a href="https://ia601606.us.archive.org/25/items/026PodcastConFrankDeBatera2x100/%23026%20Podcast%20con%20Frank%20de%20Bater%C3%ADa2x100.mp3" title="026. Podcast con Frank de Batería2x100, Hablamos de como gestionamos nuestras Fotos, actualidad y sorteo del libro del año">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">026. Podcast con Frank de Batería2x100, Hablamos de como gestionamos nuestras Fotos, actualidad y sorteo del libro del año</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-64">
+		<a href="https://www.ivoox.com/transexualidad_mf_17427425_feed_1.mp3" title="Transexualidad">
+			<span class="isplaying"></span>
+			<span class="logo mosqueterowebtecnologialinuxajedrez"></span>
+			<span class="podcast">Mosqueteroweb tecnologia, Linux, ajedrez, ...</span>
+			<span class="track">Transexualidad</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-65">
+		<a href="https://www.ivoox.com/flintos-raspberry-pi-vernee-thor_mf_17416576_feed_1.mp3" title="FlintOS, Raspberry PI y Vernee Thor">
+			<span class="isplaying"></span>
+			<span class="logo mosqueterowebtecnologialinuxajedrez"></span>
+			<span class="podcast">Mosqueteroweb tecnologia, Linux, ajedrez, ...</span>
+			<span class="track">FlintOS, Raspberry PI y Vernee Thor</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-66">
+		<a href="https://ia601600.us.archive.org/16/items/025MtodoMMsCompletoQueParaRecopilarNotasOrgMode/%23025%20M%C3%A9todo%20m%C3%A1s%20completo%20que%20para%20recopilar%20notas%2C%20org%20mode.mp3" title="025. Metodo mas completo para recopilar notas, org Mode">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">025. Metodo mas completo para recopilar notas, org Mode</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-67">
+		<a href="http://www.ivoox.com/109-mi-vuelta-a-antergos-linux-al-estilo_mf_17415345_feed_1.mp3" title="#109 Mi vuelta a Antergos Linux al estilo Atlético de Madrid">
+			<span class="isplaying"></span>
+			<span class="logo salmorejogeek"></span>
+			<span class="podcast">Salmorejo Geek</span>
+			<span class="track">#109 Mi vuelta a Antergos Linux al estilo Atlético de Madrid</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-68">
+		<a href="https://ia601605.us.archive.org/10/items/024ConectateRemotamenteATuRaspberryPiCondataplicity/%23024%20Conectate%20remotamente%20a%20tu%20Raspberry%20Pi%20con%20%22dataplicity%22%20.mp3" title="024. Conectate remotamente a tu Raspberry Pi con "dataplicity"">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">024. Conectate remotamente a tu Raspberry Pi con "dataplicity"</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-69">
+		<a href="https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/03/podcast-15-mumble.mp3" title="Podcast #15: Mumble, tu mesa de reuniones virtual">
+			<span class="isplaying"></span>
+			<span class="logo podcastdeeduardocollado"></span>
+			<span class="podcast">Podcast de Eduardo Collado</span>
+			<span class="track">Podcast #15: Mumble, tu mesa de reuniones virtual</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-70">
+		<a href="http://www.ivoox.com/108-directo-asi-estan-cosas-marzo_mf_17354573_feed_1.mp3" title="#108 Directo - Así están las cosas (Marzo 2017)">
+			<span class="isplaying"></span>
+			<span class="logo salmorejogeek"></span>
+			<span class="podcast">Salmorejo Geek</span>
+			<span class="track">#108 Directo - Así están las cosas (Marzo 2017)</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-71">
+		<a href="https://ia801609.us.archive.org/20/items/EntrevistaADosDesarrolladoresDeSoftwareLibreDeIgalia/Entrevista%20a%20dos%20desarrolladores%20de%20Software%20Libre%20de%20Igalia.mp3" title="023. Entrevista a Chema y Juan, dos desarrolladores de Software Libre de Igalia.com en el #mwc17">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">023. Entrevista a Chema y Juan, dos desarrolladores de Software Libre de Igalia.com en el #mwc17</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-72">
+		<a href="https://ia601600.us.archive.org/33/items/EntrevistaConArturoSuarezDirectivoDelCloudDeCanonicalUbuntu/Entrevista%20con%20Arturo%20Suarez,%20Directivo%20del%20Cloud%20de%20Canonical%20Ubuntu.mp3" title="022. Entrevista con Arturo Suarez, DIrectivo del Cloud de Canonical Ubuntu">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">022. Entrevista con Arturo Suarez, DIrectivo del Cloud de Canonical Ubuntu</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-73">
+		<a href="http://www.ivoox.com/19-gnu-linux-escuela_mf_17289281_feed_1.mp3" title="#19 GNU/Linux en la escuela">
+			<span class="isplaying"></span>
+			<span class="logo podcastlinux"></span>
+			<span class="podcast">Podcast Linux</span>
+			<span class="track">#19 GNU/Linux en la escuela</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-74">
+		<a href="https://www.ivoox.com/amd-vs-intel-samsung-nokia-mwc-spotify-cloudflare_mf_17285109_feed_1.mp3" title="AMD vs Intel. Samsung. Nokia MWC Spotify Cloudflare Martingala">
+			<span class="isplaying"></span>
+			<span class="logo mosqueterowebtecnologialinuxajedrez"></span>
+			<span class="podcast">Mosqueteroweb tecnologia, Linux, ajedrez, ...</span>
+			<span class="track">AMD vs Intel. Samsung. Nokia MWC Spotify Cloudflare Martingala</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-75">
+		<a href="https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/02/podcast-14-radio-o-podcast.mp3" title="Podcast #14: Radio o Podcast, no elijas puedes tener las dos">
+			<span class="isplaying"></span>
+			<span class="logo podcastdeeduardocollado"></span>
+			<span class="podcast">Podcast de Eduardo Collado</span>
+			<span class="track">Podcast #14: Radio o Podcast, no elijas puedes tener las dos</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-76">
+		<a href="https://ia801606.us.archive.org/21/items/021UbuntuEnMobileWorldCongress/%23021%20ubuntu%20en%20Mobile%20World%20Congress%20.mp3" title="021. Ubuntu en el Mobile World Congress">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">021. Ubuntu en el Mobile World Congress</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-77">
+		<a href="https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/02/podcast-13-ospf-multiarea.mp3" title="Podcast #13: OSPF Multiárea">
+			<span class="isplaying"></span>
+			<span class="logo podcastdeeduardocollado"></span>
+			<span class="podcast">Podcast de Eduardo Collado</span>
+			<span class="track">Podcast #13: OSPF Multiárea</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-78">
+		<a href="https://ia601601.us.archive.org/7/items/20PodcastConFrankDeBatera2x100HablamosDeComoGestionamosNuestraNotas/%2320%20Podcast%20con%20Frank%20de%20Bater%c3%ada2x100%2c%20Hablamos%20de%20como%20gestionamos%20nuestra%20notas%20.mp3" title="020. Podcast con Frank de Batería2x100, Hablamos de como gestionamos nuestra notas y mucho mas...">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">020. Podcast con Frank de Batería2x100, Hablamos de como gestionamos nuestra notas y mucho mas...</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-79">
+		<a href="https://www.ivoox.com/noticias-tecnologicas_mf_17193972_feed_1.mp3" title="Noticias Tecnológicas">
+			<span class="isplaying"></span>
+			<span class="logo mosqueterowebtecnologialinuxajedrez"></span>
+			<span class="podcast">Mosqueteroweb tecnologia, Linux, ajedrez, ...</span>
+			<span class="track">Noticias Tecnológicas</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-80">
+		<a href="https://ia601603.us.archive.org/6/items/019DokuwikiNuevaFormaDeTomarMisNotas/%23019%20Dokuwiki%2c%20nueva%20forma%20de%20tomar%20mis%20notas%20.mp3" title="019. Dokuwiki, nueva forma de tomar mis notas. Monta tu wiki con DokuWiki o MediaWiki.">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">019. Dokuwiki, nueva forma de tomar mis notas. Monta tu wiki con DokuWiki o MediaWiki.</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-81">
+		<a href="https://ia601604.us.archive.org/24/items/018WallabagElPocketOInstapaper/%23018_Wallabag%2c_el_Pocket_o_Instapaper.mp3" title="018. Como montar Wallabag, el Pocket o Instapaper de software libre y lo mejor de todo, en tu servidor">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">018. Como montar Wallabag, el Pocket o Instapaper de software libre y lo mejor de todo, en tu servidor</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-82">
+		<a href="https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/02/podcast-12-atencion-al-cliente-y-migrar-una-web.mp3" title="Podcast #12: Atención al cliente y migrar una web">
+			<span class="isplaying"></span>
+			<span class="logo podcastdeeduardocollado"></span>
+			<span class="podcast">Podcast de Eduardo Collado</span>
+			<span class="track">Podcast #12: Atención al cliente y migrar una web</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-83">
+		<a href="https://ia801300.us.archive.org/34/items/017PodcastConFrankDeBateria2x100HablandoDePlexNextcloud.../%23017%20Podcast%20con%20Frank%20de%20Bateria2x100%2c%20hablando%20de%20Plex%2c%20Nextcloud....mp3" title="017. Podcast con Frank de Bateria2x100, hablando de Plex, Nextcloud...">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">017. Podcast con Frank de Bateria2x100, hablando de Plex, Nextcloud...</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-84">
+		<a href="https://ia801603.us.archive.org/24/items/016QueEsUnServidor/%23016%20Que%20es%20un%20servidor.mp3" title="016. Que es un Servidor (dudas oyentes), servidor web, ...">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">016. Que es un Servidor (dudas oyentes), servidor web, ...</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-85">
+		<a href="https://ia801603.us.archive.org/20/items/015AlmacenamientoTheNextcloud/%23015_almacenamiento_the_nextcloud.mp3" title="015. Como ampliar el almacenamiento de Nextcloud, combinar con nubes publicas y hacer copias de mis fotos.">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">015. Como ampliar el almacenamiento de Nextcloud, combinar con nubes publicas y hacer copias de mis fotos.</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-86">
+		<a href="http://www.ivoox.com/18-linux-connexion-bitacora-ciberseguridad_mf_17029145_feed_1.mp3" title="#18 Linux Connexion con Bitácora de Ciberseguridad">
+			<span class="isplaying"></span>
+			<span class="logo podcastlinux"></span>
+			<span class="podcast">Podcast Linux</span>
+			<span class="track">#18 Linux Connexion con Bitácora de Ciberseguridad</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-87">
+		<a href="https://ia601602.us.archive.org/11/items/NotasEnNextcloud/Notas%20en%20nextcloud.mp3" title="014. Notas en Nextcloud y Markdown">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">014. Notas en Nextcloud y Markdown</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-88">
+		<a href="https://ia801601.us.archive.org/21/items/013NewsYFreshRSS.GestorDeNoticiasRSS/%23013%20News%20y%20Fresh%20RSS.%20Gestor%20de%20Noticias%20RSS.mp3" title="013. News y FreshRSS. Gestor de Noticias RSS.">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">013. News y FreshRSS. Gestor de Noticias RSS.</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-89">
+		<a href="https://ia801604.us.archive.org/21/items/013FDroidAplicacionesDeSoftwareLibre/%23013%20F-Droid%20Aplicaciones%20de%20Software%20Libre.mp3" title="013. bis F-Droid Tienda Android de aplicaciones de Software Libre y Actualizar las Noticias en Nextcloud.">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">013. bis F-Droid Tienda Android de aplicaciones de Software Libre y Actualizar las Noticias en Nextcloud.</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-90">
+		<a href="http://www.ivoox.com/107-no-soy-fanboy_mf_16980247_feed_1.mp3" title="#107 No soy un Fanboy">
+			<span class="isplaying"></span>
+			<span class="logo salmorejogeek"></span>
+			<span class="podcast">Salmorejo Geek</span>
+			<span class="track">#107 No soy un Fanboy</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-91">
+		<a href="https://ia801601.us.archive.org/24/items/012CmoActualizarNextcloudY/%23012_c%c3%b3mo_actualizar_Nextcloud_y.mp3" title="012. Como actualizar Nextcloud y salir del modo de "mantenimiento"">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">012. Como actualizar Nextcloud y salir del modo de "mantenimiento"</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-92">
+		<a href="https://www.ivoox.com/w10-no-va-bien-mac-vs-linux-directo_mf_16950998_feed_1.mp3" title="W10 NO va bien. Mac vs Linux. Directo con ChineseDroid+AndroyTecno">
+			<span class="isplaying"></span>
+			<span class="logo mosqueterowebtecnologialinuxajedrez"></span>
+			<span class="podcast">Mosqueteroweb tecnologia, Linux, ajedrez, ...</span>
+			<span class="track">W10 NO va bien. Mac vs Linux. Directo con ChineseDroid+AndroyTecno</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-93">
+		<a href="https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/02/podcast-11-ospf-en-un-area.mp3" title="Podcast #11: OSPF en un único área">
+			<span class="isplaying"></span>
+			<span class="logo podcastdeeduardocollado"></span>
+			<span class="podcast">Podcast de Eduardo Collado</span>
+			<span class="track">Podcast #11: OSPF en un único área</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-94">
+		<a href="https://ia801602.us.archive.org/16/items/011PodcastConFrankDeBateria2x100/%23011%20Podcast%20con%20Frank%20de%20Bateria2x100.mp3" title="011. Podcast con Frank de Bateria2x100, hablando un poco de todo...">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">011. Podcast con Frank de Bateria2x100, hablando un poco de todo...</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-95">
+		<a href="http://www.ivoox.com/106-linux-no-es-dificil-somos-viejos_mf_16934360_feed_1.mp3" title="#106 Linux no es difícil, somos los viejos usuarios quienes lo hacemos así">
+			<span class="isplaying"></span>
+			<span class="logo salmorejogeek"></span>
+			<span class="podcast">Salmorejo Geek</span>
+			<span class="track">#106 Linux no es difícil, somos los viejos usuarios quienes lo hacemos así</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-96">
+		<a href="https://ia601603.us.archive.org/9/items/010ElSistemaOperativoDeBolsillo/%23010%20El%20Sistema%20Operativo%20de%20bolsillo.mp3" title="010. CloudReady el Chromium OS de bolsillo">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">010. CloudReady el Chromium OS de bolsillo</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-97">
+		<a href="https://ia601602.us.archive.org/11/items/ComoCrearTuPodcastYTotalmenteGtatis/Como%20crear%20tu%20podcast%20y%20totalmente%20gtatis.mp3" title="009. Crea tu podcast en 3 simples pasos y totalmente gratis">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">009. Crea tu podcast en 3 simples pasos y totalmente gratis</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-98">
+		<a href="https://ia801900.us.archive.org/13/items/008ComoGestionoMisNotas/%23008%20Como%20gestiono%20mis%20notas.mp3" title="008. Como gestiono mis Notas">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">008. Como gestiono mis Notas</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-99">
+		<a href="https://www.ivoox.com/batiburrillo-androytecno_mf_16862300_feed_1.mp3" title="Batiburrillo con AndroyTecno">
+			<span class="isplaying"></span>
+			<span class="logo mosqueterowebtecnologialinuxajedrez"></span>
+			<span class="podcast">Mosqueteroweb tecnologia, Linux, ajedrez, ...</span>
+			<span class="track">Batiburrillo con AndroyTecno</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-100">
+		<a href="hhttps://ia601902.us.archive.org/28/items/007LinuxEsUnaAlternativaReal/%23007%20Linux%20es%20una%20alternativa%20real.mp3" title="007. Linux es una alternativa real">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">007. Linux es una alternativa real</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-101">
+		<a href="https://ia601900.us.archive.org/18/items/ElTrelloDeSoftwareLibreWekan/El_Trello_de_software_libre_Wekan.mp3" title="006. El Trello de Software Libre Wekan y Kanboard para Raspberry Pi. El sistema Kanban en tu servidor.">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">006. El Trello de Software Libre Wekan y Kanboard para Raspberry Pi. El sistema Kanban en tu servidor.</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-102">
+		<a href="http://www.ivoox.com/105-directo-asi-estan-cosas-febrero-2017_mf_16815748_feed_1.mp3" title="#105 #Directo Así están las cosas (Febrero 2017)">
+			<span class="isplaying"></span>
+			<span class="logo salmorejogeek"></span>
+			<span class="podcast">Salmorejo Geek</span>
+			<span class="track">#105 #Directo Así están las cosas (Febrero 2017)</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-103">
+		<a href="https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/02/podcast-10-dns-y-arp.mp3" title="Podcast #10: Cómo funciona el DNS">
+			<span class="isplaying"></span>
+			<span class="logo podcastdeeduardocollado"></span>
+			<span class="podcast">Podcast de Eduardo Collado</span>
+			<span class="track">Podcast #10: Cómo funciona el DNS</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-104">
+		<a href="https://ia601603.us.archive.org/9/items/005PaperDeDropbox/%23005%20Paper%20de%20Dropbox.mp3" title="005. Paper de Dropbox">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">005. Paper de Dropbox</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-105">
+		<a href="http://www.ivoox.com/17-linux-connexion-alexandre-filgueira_mf_16768269_feed_1.mp3" title="#17 Linux Connexion con Alexandre Filgueira">
+			<span class="isplaying"></span>
+			<span class="logo podcastlinux"></span>
+			<span class="podcast">Podcast Linux</span>
+			<span class="track">#17 Linux Connexion con Alexandre Filgueira</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-106">
+		<a href="https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/01/podcast-9-streaming-con-icecat2-mp3.mp3" title="Podcast #9: Streaming con Icecast 2">
+			<span class="isplaying"></span>
+			<span class="logo podcastdeeduardocollado"></span>
+			<span class="podcast">Podcast de Eduardo Collado</span>
+			<span class="track">Podcast #9: Streaming con Icecast 2</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-107">
+		<a href="https://ia601903.us.archive.org/19/items/004ServidorLinuxVsQNapSynology/%23004%20Servidor%20Linux%20Vs%20QNap-Synology.mp3" title="004. Servidor Linux Vs QNAP-Synology">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">004. Servidor Linux Vs QNAP-Synology</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-108">
+		<a href="https://ia601903.us.archive.org/4/items/003Nextcloud/%23003%20Nextcloud.mp3" title="003. Nextcloud. Instalar tu Nube en menos de 2 minutos.">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">003. Nextcloud. Instalar tu Nube en menos de 2 minutos.</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-109">
+		<a href="https://ia801904.us.archive.org/20/items/DeQueVaEstoDeUGeek/De%20que%20va%20esto%20de%20uGeek%3f.mp3" title="002. "De qué va esto de uGeek?"">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">002. "De qué va esto de uGeek?"</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-110">
+		<a href="https://ia801602.us.archive.org/21/items/HolaMundo_201701/Hola%20Mundo.mp3" title="001. Hola Mundo">
+			<span class="isplaying"></span>
+			<span class="logo ugeek"></span>
+			<span class="podcast">uGeek</span>
+			<span class="track">001. Hola Mundo</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-111">
+		<a href="https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/01/podcast-8-el-viaje-de-cargar-una-web.mp3" title="Podcast #8: El viaje de cargar una web">
+			<span class="isplaying"></span>
+			<span class="logo podcastdeeduardocollado"></span>
+			<span class="podcast">Podcast de Eduardo Collado</span>
+			<span class="track">Podcast #8: El viaje de cargar una web</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-112">
+		<a href="http://www.ivoox.com/104-probando-3-cacharros-amazon-adaptadores-wifi_mf_16547697_feed_1.mp3" title="#104 Probando 3 cacharros de Amazon: Adaptadores Wifi, Bluetooth y disco duro Sata">
+			<span class="isplaying"></span>
+			<span class="logo salmorejogeek"></span>
+			<span class="podcast">Salmorejo Geek</span>
+			<span class="track">#104 Probando 3 cacharros de Amazon: Adaptadores Wifi, Bluetooth y disco duro Sata</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-113">
+		<a href="http://www.ivoox.com/16-antergos_mf_16451726_feed_1.mp3" title="#16 Antergos">
+			<span class="isplaying"></span>
+			<span class="logo podcastlinux"></span>
+			<span class="podcast">Podcast Linux</span>
+			<span class="track">#16 Antergos</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-114">
+		<a href="https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/01/podcast-7-cableado.mp3" title="Podcast #7: Cableado en un Centro de Datos">
+			<span class="isplaying"></span>
+			<span class="logo podcastdeeduardocollado"></span>
+			<span class="podcast">Podcast de Eduardo Collado</span>
+			<span class="track">Podcast #7: Cableado en un Centro de Datos</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-115">
+		<a href="http://www.ivoox.com/15-linux-connexion-jen0f0nte_mf_15880251_feed_1.mp3" title="#15 Linux Connexion con Jen0f0nte">
+			<span class="isplaying"></span>
+			<span class="logo podcastlinux"></span>
+			<span class="podcast">Podcast Linux</span>
+			<span class="track">#15 Linux Connexion con Jen0f0nte</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-116">
+		<a href="http://www.ivoox.com/103-esto-se-va-a-descontrolar-sobre-tuxlibanes_mf_15817492_feed_1.mp3" title="#103 Esto se va a descontrolar: Sobre tuxlibanes, blogs linuxeros y sus comunidades">
+			<span class="isplaying"></span>
+			<span class="logo salmorejogeek"></span>
+			<span class="podcast">Salmorejo Geek</span>
+			<span class="track">#103 Esto se va a descontrolar: Sobre tuxlibanes, blogs linuxeros y sus comunidades</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-117">
+		<a href="https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2016/12/podcast-6-almacenamiento.mp3" title="Podcast #6: Almacenamiento">
+			<span class="isplaying"></span>
+			<span class="logo podcastdeeduardocollado"></span>
+			<span class="podcast">Podcast de Eduardo Collado</span>
+			<span class="track">Podcast #6: Almacenamiento</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-118">
+		<a href="http://www.ivoox.com/102-balance-linuxero-2016-deseos-para-2017_mf_15446331_feed_1.mp3" title="#102 Balance linuxero 2016 y deseos para 2017 por el Killall Radio Podcast Team">
+			<span class="isplaying"></span>
+			<span class="logo salmorejogeek"></span>
+			<span class="podcast">Salmorejo Geek</span>
+			<span class="track">#102 Balance linuxero 2016 y deseos para 2017 por el Killall Radio Podcast Team</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-119">
+		<a href="http://www.ivoox.com/14-especial-slimbook-katana_mf_15380402_feed_1.mp3" title="#14 Especial Slimbook Katana">
+			<span class="isplaying"></span>
+			<span class="logo podcastlinux"></span>
+			<span class="podcast">Podcast Linux</span>
+			<span class="track">#14 Especial Slimbook Katana</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-120">
+		<a href="https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2016/12/podcast-5-cloud-centros-de-datos.mp3" title="Podcast #5: Introducción al Cloud y servicios de Centros de Datos">
+			<span class="isplaying"></span>
+			<span class="logo podcastdeeduardocollado"></span>
+			<span class="podcast">Podcast de Eduardo Collado</span>
+			<span class="track">Podcast #5: Introducción al Cloud y servicios de Centros de Datos</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-121">
+		<a href="http://www.ivoox.com/101-linux-uefi-gpt-mbr-los_mf_15114926_feed_1.mp3" title="#101 Linux en UEFI GPT MBR y los instaladores de las distribuciones">
+			<span class="isplaying"></span>
+			<span class="logo salmorejogeek"></span>
+			<span class="podcast">Salmorejo Geek</span>
+			<span class="track">#101 Linux en UEFI GPT MBR y los instaladores de las distribuciones</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-122">
+		<a href="http://www.ivoox.com/13-ciberseguridad-basica-gnu-linux_mf_14880771_feed_1.mp3" title="#13 Ciberseguridad Básica en GNU/Linux">
+			<span class="isplaying"></span>
+			<span class="logo podcastlinux"></span>
+			<span class="podcast">Podcast Linux</span>
+			<span class="track">#13 Ciberseguridad Básica en GNU/Linux</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-123">
+		<a href="http://www.ivoox.com/100-engrasando-ubuntu-a-vueltas-la_mf_14836526_feed_1.mp3" title="#100 Engrasando con Ubuntu, a vueltas con la distro única">
+			<span class="isplaying"></span>
+			<span class="logo salmorejogeek"></span>
+			<span class="podcast">Salmorejo Geek</span>
+			<span class="track">#100 Engrasando con Ubuntu, a vueltas con la distro única</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-124">
+		<a href="https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2016/12/podcast-4-ssl-spam-postventa-de-apple.mp3" title="Podcast #4: SSL, spam y postventa de Apple">
+			<span class="isplaying"></span>
+			<span class="logo podcastdeeduardocollado"></span>
+			<span class="podcast">Podcast de Eduardo Collado</span>
+			<span class="track">Podcast #4: SSL, spam y postventa de Apple</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-125">
+		<a href="https://www.ivoox.com/w10-2gb-moto-mods-no-raid_mf_14773966_feed_1.mp3" title="W10 +2GB Moto Mods, No Raid">
+			<span class="isplaying"></span>
+			<span class="logo mosqueterowebtecnologialinuxajedrez"></span>
+			<span class="podcast">Mosqueteroweb tecnologia, Linux, ajedrez, ...</span>
+			<span class="track">W10 +2GB Moto Mods, No Raid</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-126">
+		<a href="https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2016/12/podcast-3-como-crear-un-podcast.mp3" title="Podcast #3: Cómo crear un podcast">
+			<span class="isplaying"></span>
+			<span class="logo podcastdeeduardocollado"></span>
+			<span class="podcast">Podcast de Eduardo Collado</span>
+			<span class="track">Podcast #3: Cómo crear un podcast</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-127">
+		<a href="http://www.ivoox.com/12-linux-connexion-alejandro-lopez-slimbook_mf_14164009_feed_1.mp3" title="#12 Linux Connexion con Alejandro López ( Slimbook )">
+			<span class="isplaying"></span>
+			<span class="logo podcastlinux"></span>
+			<span class="podcast">Podcast Linux</span>
+			<span class="track">#12 Linux Connexion con Alejandro López ( Slimbook )</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-128">
+		<a href="https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2016/12/podcast-2-crud-en-rails-formularios-dinamicos.mp3" title="Podcast #2: Git, CRUD en Rails y Formularios dinámicos en HTML con JavaScript">
+			<span class="isplaying"></span>
+			<span class="logo podcastdeeduardocollado"></span>
+			<span class="podcast">Podcast de Eduardo Collado</span>
+			<span class="track">Podcast #2: Git, CRUD en Rails y Formularios dinámicos en HTML con JavaScript</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-129">
+		<a href="http://www.ivoox.com/11-linux-connexion-gabriel-viso-pitando-net-podcast_mf_13759097_feed_1.mp3" title="#11 Linux Connexion con Gabriel Viso (Pitando.net). Podcast Linux">
+			<span class="isplaying"></span>
+			<span class="logo podcastlinux"></span>
+			<span class="podcast">Podcast Linux</span>
+			<span class="track">#11 Linux Connexion con Gabriel Viso (Pitando.net). Podcast Linux</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-130">
+		<a href="https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2016/12/podcast-1-presentacion-rails-lynda.mp3" title="Podcast #1: Presentación, Rails y Lynda.com">
+			<span class="isplaying"></span>
+			<span class="logo podcastdeeduardocollado"></span>
+			<span class="podcast">Podcast de Eduardo Collado</span>
+			<span class="track">Podcast #1: Presentación, Rails y Lynda.com</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-131">
+		<a href="https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2016/12/podcast-0.mp3" title="Podcast #0: Presentación">
+			<span class="isplaying"></span>
+			<span class="logo podcastdeeduardocollado"></span>
+			<span class="podcast">Podcast de Eduardo Collado</span>
+			<span class="track">Podcast #0: Presentación</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-132">
+		<a href="http://www.ivoox.com/10-raspberry-pi-gnu-linux-podcast-linux_mf_13546779_feed_1.mp3" title="#10 Raspberry Pi y GNU/Linux. Podcast Linux">
+			<span class="isplaying"></span>
+			<span class="logo podcastlinux"></span>
+			<span class="podcast">Podcast Linux</span>
+			<span class="track">#10 Raspberry Pi y GNU/Linux. Podcast Linux</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-133">
+		<a href="https://www.ivoox.com/linux-ha-vencido-cuidado-linux_mf_13467162_feed_1.mp3" title="Linux ha vencido! Cuidado con Linux!">
+			<span class="isplaying"></span>
+			<span class="logo mosqueterowebtecnologialinuxajedrez"></span>
+			<span class="podcast">Mosqueteroweb tecnologia, Linux, ajedrez, ...</span>
+			<span class="track">Linux ha vencido! Cuidado con Linux!</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-134">
+		<a href="https://www.ivoox.com/moviles-servidor-casero_mf_13366716_feed_1.mp3" title="Móviles y Servidor Casero">
+			<span class="isplaying"></span>
+			<span class="logo mosqueterowebtecnologialinuxajedrez"></span>
+			<span class="podcast">Mosqueteroweb tecnologia, Linux, ajedrez, ...</span>
+			<span class="track">Móviles y Servidor Casero</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-135">
+		<a href="http://www.ivoox.com/09-especial-lenovo-thinkpad-x220_mf_13265714_feed_1.mp3" title="#09 Especial Lenovo ThinkPad X220">
+			<span class="isplaying"></span>
+			<span class="logo podcastlinux"></span>
+			<span class="podcast">Podcast Linux</span>
+			<span class="track">#09 Especial Lenovo ThinkPad X220</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-136">
+		<a href="http://www.ivoox.com/08-sabores-a-montones_mf_13103580_feed_1.mp3" title="#08 Sabores a montones">
+			<span class="isplaying"></span>
+			<span class="logo podcastlinux"></span>
+			<span class="podcast">Podcast Linux</span>
+			<span class="track">#08 Sabores a montones</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-137">
+		<a href="https://www.ivoox.com/distribuciones-linux-recomendaciones_mf_13011221_feed_1.mp3" title="Distribuciones Linux. Recomendaciones">
+			<span class="isplaying"></span>
+			<span class="logo mosqueterowebtecnologialinuxajedrez"></span>
+			<span class="podcast">Mosqueteroweb tecnologia, Linux, ajedrez, ...</span>
+			<span class="track">Distribuciones Linux. Recomendaciones</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-138">
+		<a href="http://www.ivoox.com/07-linux-connexion-huezo-grupo-telegram_mf_12912418_feed_1.mp3" title="#07 Linux Connexion con Huezo (Grupo Telegram GNU-Linux)">
+			<span class="isplaying"></span>
+			<span class="logo podcastlinux"></span>
+			<span class="podcast">Podcast Linux</span>
+			<span class="track">#07 Linux Connexion con Huezo (Grupo Telegram GNU-Linux)</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-139">
+		<a href="http://www.ivoox.com/07-linux-connexion-huezo-grupo-telegram-gnu-linux_mf_13383404_feed_1.mp3" title="#07 Linux Connexion con Huezo (Grupo Telegram GNU/Linux) Podcast Linux">
+			<span class="isplaying"></span>
+			<span class="logo podcastlinux"></span>
+			<span class="podcast">Podcast Linux</span>
+			<span class="track">#07 Linux Connexion con Huezo (Grupo Telegram GNU/Linux) Podcast Linux</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-140">
+		<a href="https://www.ivoox.com/verano-tecnologia_mf_12810335_feed_1.mp3" title="Verano y Tecnología.">
+			<span class="isplaying"></span>
+			<span class="logo mosqueterowebtecnologialinuxajedrez"></span>
+			<span class="podcast">Mosqueteroweb tecnologia, Linux, ajedrez, ...</span>
+			<span class="track">Verano y Tecnología.</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-141">
+		<a href="http://www.ivoox.com/06-conlinuxsisepuede_mf_12737297_feed_1.mp3" title="#06 #ConLinuxSíSePuede">
+			<span class="isplaying"></span>
+			<span class="logo podcastlinux"></span>
+			<span class="podcast">Podcast Linux</span>
+			<span class="track">#06 #ConLinuxSíSePuede</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-142">
+		<a href="http://www.ivoox.com/06-conlinuxsisepuede-podcast-linux_mf_13383405_feed_1.mp3" title="#06 #ConLinuxSíSePuede. Podcast Linux">
+			<span class="isplaying"></span>
+			<span class="logo podcastlinux"></span>
+			<span class="podcast">Podcast Linux</span>
+			<span class="track">#06 #ConLinuxSíSePuede. Podcast Linux</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-143">
+		<a href="http://www.ivoox.com/05-linux-connexion-yoyo-fernandez_mf_12593330_feed_1.mp3" title="#05 Linux Connexion con Yoyo Fernández">
+			<span class="isplaying"></span>
+			<span class="logo podcastlinux"></span>
+			<span class="podcast">Podcast Linux</span>
+			<span class="track">#05 Linux Connexion con Yoyo Fernández</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-144">
+		<a href="http://www.ivoox.com/05-linux-connexion-yoyo-fernandez_mf_13383406_feed_1.mp3" title="#05 Linux Connexion con Yoyo Fernández">
+			<span class="isplaying"></span>
+			<span class="logo podcastlinux"></span>
+			<span class="podcast">Podcast Linux</span>
+			<span class="track">#05 Linux Connexion con Yoyo Fernández</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-145">
+		<a href="http://www.ivoox.com/04-amor-distro-madre_mf_12520959_feed_1.mp3" title="#04 Amor de (Distro) madre">
+			<span class="isplaying"></span>
+			<span class="logo podcastlinux"></span>
+			<span class="podcast">Podcast Linux</span>
+			<span class="track">#04 Amor de (Distro) madre</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-146">
+		<a href="http://www.ivoox.com/04-amor-distro-madre-podcast-linux_mf_13383407_feed_1.mp3" title="#04 Amor de Distro Madre. Podcast Linux">
+			<span class="isplaying"></span>
+			<span class="logo podcastlinux"></span>
+			<span class="podcast">Podcast Linux</span>
+			<span class="track">#04 Amor de Distro Madre. Podcast Linux</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-147">
+		<a href="http://www.ivoox.com/03-y-no-estaba-muerto-no-no_mf_12374536_feed_1.mp3" title="#03 Y no estaba muerto, no no">
+			<span class="isplaying"></span>
+			<span class="logo podcastlinux"></span>
+			<span class="podcast">Podcast Linux</span>
+			<span class="track">#03 Y no estaba muerto, no no</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-148">
+		<a href="http://www.ivoox.com/03-y-no-estaba-muerto-no-no-podcast_mf_13383408_feed_1.mp3" title="#03 Y no estaba muerto, no, no. Podcast Linux">
+			<span class="isplaying"></span>
+			<span class="logo podcastlinux"></span>
+			<span class="podcast">Podcast Linux</span>
+			<span class="track">#03 Y no estaba muerto, no, no. Podcast Linux</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-149">
+		<a href="http://www.ivoox.com/02-un-pinguino-mi-usb_mf_12218805_feed_1.mp3" title="#02 Un pingüino en mi USB">
+			<span class="isplaying"></span>
+			<span class="logo podcastlinux"></span>
+			<span class="podcast">Podcast Linux</span>
+			<span class="track">#02 Un pingüino en mi USB</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-150">
+		<a href="http://www.ivoox.com/02-un-pinguino-mi-usb-podcast-linux_mf_13383409_feed_1.mp3" title="#02 Un pingüino en mi USB Podcast Linux">
+			<span class="isplaying"></span>
+			<span class="logo podcastlinux"></span>
+			<span class="podcast">Podcast Linux</span>
+			<span class="track">#02 Un pingüino en mi USB Podcast Linux</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-151">
+		<a href="https://www.ivoox.com/50gb-20euros-audio-mejorado-linea-vacaciones-vodafone-linux-mint-18_mf_12098132_feed_1.mp3" title="50GB-20€ audio Mejorado.Línea vacaciones Vodafone, Linux Mint 18, teclast x89">
+			<span class="isplaying"></span>
+			<span class="logo mosqueterowebtecnologialinuxajedrez"></span>
+			<span class="podcast">Mosqueteroweb tecnologia, Linux, ajedrez, ...</span>
+			<span class="track">50GB-20€ audio Mejorado.Línea vacaciones Vodafone, Linux Mint 18, teclast x89</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-152">
+		<a href="http://www.ivoox.com/01-antecedentes_mf_12085902_feed_1.mp3" title="#01 Antecedentes">
+			<span class="isplaying"></span>
+			<span class="logo podcastlinux"></span>
+			<span class="podcast">Podcast Linux</span>
+			<span class="track">#01 Antecedentes</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-153">
+		<a href="http://www.ivoox.com/01-antecedentes-podcast-linux_mf_13383410_feed_1.mp3" title="#01 Antecedentes. Podcast Linux">
+			<span class="isplaying"></span>
+			<span class="logo podcastlinux"></span>
+			<span class="podcast">Podcast Linux</span>
+			<span class="track">#01 Antecedentes. Podcast Linux</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-154">
+		<a href="http://www.ivoox.com/00-promo-podcast-linux_mf_12048502_feed_1.mp3" title="#00 Promo Podcast Linux">
+			<span class="isplaying"></span>
+			<span class="logo podcastlinux"></span>
+			<span class="podcast">Podcast Linux</span>
+			<span class="track">#00 Promo Podcast Linux</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-155">
+		<a href="http://www.ivoox.com/00-promo-podcast-linux_mf_13383411_feed_1.mp3" title="#00 Promo Podcast Linux">
+			<span class="isplaying"></span>
+			<span class="logo podcastlinux"></span>
+			<span class="podcast">Podcast Linux</span>
+			<span class="track">#00 Promo Podcast Linux</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-156">
+		<a href="https://www.ivoox.com/teclast-x89-kindow-chromebook-otras-noticias_mf_11777780_feed_1.mp3" title="Teclast x89 kindow. Chromebook y otras noticias">
+			<span class="isplaying"></span>
+			<span class="logo mosqueterowebtecnologialinuxajedrez"></span>
+			<span class="podcast">Mosqueteroweb tecnologia, Linux, ajedrez, ...</span>
+			<span class="track">Teclast x89 kindow. Chromebook y otras noticias</span>
+		</a>
+	</span>
+</li>
+<li>
+	<span id="item-157">
+		<a href="https://www.ivoox.com/tablet-portatil-2x1-boligrafos-digitales-editores-pdf_mf_11399575_feed_1.mp3" title="Tablet + portátil 2x1 Boligrafos digitales Editores pdf">
+			<span class="isplaying"></span>
+			<span class="logo mosqueterowebtecnologialinuxajedrez"></span>
+			<span class="podcast">Mosqueteroweb tecnologia, Linux, ajedrez, ...</span>
+			<span class="track">Tablet + portátil 2x1 Boligrafos digitales Editores pdf</span>
+		</a>
+	</span>
+</li>
+
+
+        </ul>
+    </div>
+</body>
+</html>
