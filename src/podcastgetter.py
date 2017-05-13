@@ -541,7 +541,9 @@ def create_base64(image_url):
             base64string = base64.b64encode(new_image.getvalue())
     except Exception as e:
         print(e)
-    return base64string.decode()
+    if base64string is not None:
+        return base64string.decode()
+    return None
 
 
 if __name__ == '__main__':
