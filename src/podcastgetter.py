@@ -10,6 +10,8 @@ import csv
 import base64
 from dateutil.parser import parse
 from PIL import Image
+import io
+
 
 FORMAT_DESCRIPTOR = "#EXTM3U"
 RECORD_MARKER = "#EXTINF"
@@ -526,31 +528,20 @@ def create_favorite_podcasts(csvfilename):
 def create_base64(image_url):
     base64string = None
     print(image_url)
-    temporal_old_image = image_url.split('/')[-1]
-    temporal_new_image = 'temporal.png'
-    if os.path.exists(temporal_old_image):
-        os.remove(temporal_old_image)
-    if os.path.exists(temporal_new_image):
-        os.remove(temporal_new_image)
     try:
         r = requests.get(image_url, timeout=5, verify=False)
         if r.status_code == 200:
-            with open(temporal_old_image, 'wb') as f:
-                for chunk in r.iter_content(1024):
-                    f.write(chunk)
-            old_image = Image.open(temporal_old_image)
+            writer_file = io.BytesIO()
+            for chunk in r.iter_content(1024):
+                writer_file.write(chunk)
+            old_image = Image.open(writer_file)
             old_image.thumbnail((48, 48), Image.ANTIALIAS)
-            old_image.save(temporal_new_image, 'PNG')
-            new_image_file = open(temporal_new_image, 'rb')
-            base64string = base64.b64encode(new_image_file.read()).decode()
-            new_image_file.close()
+            new_image = io.BytesIO()
+            old_image.save(new_image, "png")
+            base64string = base64.b64encode(new_image.getvalue())
     except Exception as e:
         print(e)
-    if os.path.exists(temporal_old_image):
-        os.remove(temporal_old_image)
-    if os.path.exists(temporal_new_image):
-        os.remove(temporal_new_image)
-    return base64string
+    return base64string.decode()
 
 
 if __name__ == '__main__':
