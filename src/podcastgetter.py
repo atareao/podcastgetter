@@ -19,6 +19,7 @@ RECORD_MARKER = "#EXTINF"
 PODCASTS = [
     'http://www.ivoox.com/salmorejo-geek_fg_f1206500_filtro_1.xml',
     'http://www.ivoox.com/podcast-linux_fg_f1297890_filtro_1.xml',
+    'https://www.ivoox.com/ubuntu-otras-hierbas_fg_f1412582_filtro_1.xml',
     'http://feeds.feedburner.com/ugeek',
     'https://www.eduardocollado.com/category/podcast/feed/',
     'https://compilando.audio/index.php/feed/podcast/',

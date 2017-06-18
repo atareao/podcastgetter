@@ -1,4 +1,80 @@
 #EXTM3U
+#EXTINF:-1,Podcast de Eduardo Collado - Podcast #35: Montar dos routers frontera BGP
+https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/06/podcast-35-montar-dos-routers-bgp.mp3
+#EXTINF:-1,uGeek - Tecnología, Android, Linux, Servidores y mucho más... - 064. Resilio. Una Nube Ilimitada, donde el control de tus datos los tienes tu.
+https://ia801501.us.archive.org/34/items/064.ResilioLaNubeDondeElControlLoTienesTu/064.%20Resilio,%20La%20nube%20donde%20el%20control%20lo%20tienes%20tu.mp3
+#EXTINF:-1,uGeek - Tecnología, Android, Linux, Servidores y mucho más... - 063. Con Linux es posible
+https://ia801502.us.archive.org/3/items/ConLinuxEsPosible/Con%20Linux%20es%20posible.mp3
+#EXTINF:-1,Salmorejo Geek - #130 Fedora 26 Beta domestica Anaconda (Blivet GUI)
+http://www.ivoox.com/130-fedora-26-beta-domestica-anaconda-blivet-gui_mf_19238108_feed_1.mp3
+#EXTINF:-1,Salmorejo Geek - #129 Junio in Love (Aventuras de Antergos, Manjaro, Linux Mint, BunsenLabs y Debian Testing)
+http://www.ivoox.com/129-junio-in-love-aventuras-antergos-manjaro_mf_19196092_feed_1.mp3
+#EXTINF:-1,Ubuntu y otras hierbas - S01E05 Comprar PCs con Ubuntu, desbandada desarrolladores Canonical y Chrome ha ganado ¿qué puede hacer Mozilla?
+https://www.ivoox.com/s01e05-comprar-pcs-ubuntu-desbandada-desarrolladores-canonical_mf_19187730_feed_1.mp3
+#EXTINF:-1,Podcast de Eduardo Collado - Podcast #34: Servicio de correo
+https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/06/podcast-34-servicio-de-correo.mp3
+#EXTINF:-1,Mosqueteroweb tecnologia, Linux, ajedrez, ... - Slimbook Excálibur Portátil con Linux x3
+http://www.ivoox.com/slimbook-excalibur-portatil-linux-x3_mf_19185139_feed_1.mp3
+#EXTINF:-1,uGeek - Tecnología, Android, Linux, Servidores y mucho más... - 062. Domótica con mi Raspberry Pi. Usemos el GPIO
+https://ia801505.us.archive.org/28/items/062.DomoticaConMiRasperry./062.%20Domotica%20con%20mi%20Rasperry..mp3
+#EXTINF:-1,Mosqueteroweb tecnologia, Linux, ajedrez, ... - Amazon ilimitado y antivacunas
+http://www.ivoox.com/amazon-ilimitado-antivacunas_mf_19160559_feed_1.mp3
+#EXTINF:-1,Podcast Linux - #26 Linux Connexion con Ugeek
+http://www.ivoox.com/26-linux-connexion-ugeek_mf_19127057_feed_1.mp3
+#EXTINF:-1,Ubuntu y otras hierbas - S01E04 Software libre en la educación
+https://www.ivoox.com/s01e04-software-libre-educacion_mf_19068060_feed_1.mp3
+#EXTINF:-1,Salmorejo Geek - #128 Instalando Antergos 17.6 Gnome (Cuéntame cómo pasó)
+http://www.ivoox.com/128-instalando-antergos-17-6-gnome-cuentame-como-paso_mf_19063480_feed_1.mp3
+#EXTINF:-1,Ubuntu y otras hierbas - S01E03 Seguridad y privacidad
+https://pt.ivoox.com/pt/s01e03-seguridad-privacidad_mf_19058066_feed_1.mp3
+#EXTINF:-1,Podcast de Eduardo Collado - Podcast #33: Virtualiación personal con VMWare Workstation y Virtualbox
+https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/06/podcast-33-virtualizacion-personal.mp3
+#EXTINF:-1,Podcast de Eduardo Collado - Podcast #32: Especial OpenExpo 2017
+https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/06/podcast-32-especial-openexpo.mp3
+#EXTINF:-1,uGeek - Tecnología, Android, Linux, Servidores y mucho más... - 061. Docker en 10 minutos
+https://ia601502.us.archive.org/23/items/DockerEnMenosDe10Min/Docker%20en%20menos%20de%2010%20min.mp3
+#EXTINF:-1,Salmorejo Geek - #127 Volviendo a Manjaro XFCE con la 17.0.1 Gellivara (mu bonito me gusta)
+http://www.ivoox.com/127-volviendo-a-manjaro-xfce-17-0-1_mf_19022388_feed_1.mp3
+#EXTINF:-1,uGeek - Tecnología, Android, Linux, Servidores y mucho más... - 060. La Terminal mas fácil con alias
+https://ia601504.us.archive.org/9/items/TerminalAlias/Terminal%20alias.mp3
+#EXTINF:-1,Mosqueteroweb tecnologia, Linux, ajedrez, ... - Computex 2017 y Gearbest
+http://www.ivoox.com/computex-2017-gearbest_mf_19018626_feed_1.mp3
+#EXTINF:-1,Salmorejo Geek - #126 hug-os
+http://www.ivoox.com/126-hug-os_mf_18978441_feed_1.mp3
+#EXTINF:-1,Podcast de Eduardo Collado - Podcast #31: Migración a KDE Neón 5.9
+https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/05/podcast-31-migracion-a-kde-neon.mp3
+#EXTINF:-1,Compilando Podcast - Podcast 6 – openSuse y KDE con Antonio Larrosa . OpenExpo2017
+http://compilando.audio/wp-content/uploads/2017/05/podcast6.mp3
+#EXTINF:-1,uGeek - Tecnología, Android, Linux, Servidores y mucho más... - 059. 2 Aplicaciones de Notas alternativas que utilizo
+https://ia801505.us.archive.org/21/items/059.2AplicacinesParaTomarNotas/059.%202%20Aplicaci%C3%B3nes%20para%20tomar%20Notas.mp3
+#EXTINF:-1,uGeek - Tecnología, Android, Linux, Servidores y mucho más... - 058. Android: Multicuentas. Gestion de Servicios Raspberry Pi
+https://ia601502.us.archive.org/10/items/058.Android.AppCloneMultipleAccounts/058.%20Android.%20App%20clone%20-%20Multiple%20Accounts.m4a
+#EXTINF:-1,Podcast de Eduardo Collado - Podcast #30: Instalación de FreePBX
+https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/05/podcast-30-instalacion-freepbx.mp3
+#EXTINF:-1,Podcast Linux - #25 GNU/Linux y NAS
+http://www.ivoox.com/25-gnu-linux-nas_mf_18870692_feed_1.mp3
+#EXTINF:-1,Salmorejo Geek - #125 WordPress me odia
+http://www.ivoox.com/125-wordpress-me-odia_mf_18832109_feed_1.mp3
+#EXTINF:-1,Ubuntu y otras hierbas - S01E02 GNOME3 y UBPorts
+https://pt.ivoox.com/pt/s01e02-gnome3-ubports_mf_18807244_feed_1.mp3
+#EXTINF:-1,Salmorejo Geek - #124 Directo Musical: Telegram, Linux en Windows 10, Ubuntu, Deepin y Movistar
+http://www.ivoox.com/124-directo-musical-telegram-linux-windows-10_mf_18806700_feed_1.mp3
+#EXTINF:-1,Podcast de Eduardo Collado - Podcast #29: Calidad de servicio en GNU/Linux
+https://media.blubrry.com/eduardocollado/www.eduardocollado.com/wp-content/uploads/2017/05/podcast-29-calidad-de-servicio-en-linux.mp3
+#EXTINF:-1,uGeek - Tecnología, Android, Linux, Servidores y mucho más... - 057. Multicuenta de Telegram en tu PC de escritorio y Wire
+https://ia801500.us.archive.org/13/items/057.MulticuentaTelegramWire/057.%20Multicuenta%20telegram,%20wire.mp3
+#EXTINF:-1,uGeek - Tecnología, Android, Linux, Servidores y mucho más... - 056. Android: Videoder y llamadas de Telegram
+https://ia801503.us.archive.org/12/items/056.VideoderYLlamadasTelegram/056.%20Videoder%20y%20llamadas%20Telegram.mp3
+#EXTINF:-1,Mosqueteroweb tecnologia, Linux, ajedrez, ... - Adios Spreaker. Cambio Feed Ivoox
+http://www.ivoox.com/adios-spreaker-cambio-feed-ivoox_mf_18744170_feed_1.mp3
+#EXTINF:-1,Mosqueteroweb tecnologia, Linux, ajedrez, ... - Linux, w10, raspi, ransomware y ultrabook
+http://www.ivoox.com/linux-w10-raspi-ransomware-ultrabook_mf_18743896_feed_1.mp3
+#EXTINF:-1,uGeek - Tecnología, Android, Linux, Servidores y mucho más... - 055. Nuevos Cambios...
+https://ia801506.us.archive.org/9/items/055.M4aAplicacionesDePodcastYNuevoMicro/055.%20M4a,%20aplicaciones%20de%20Podcast%20y%20nuevo%20micro.mp3
+#EXTINF:-1,Salmorejo Geek - #123 Linuxero bloguero bloguero linuxero ¿Quién queda que merezca la pena?
+http://www.ivoox.com/123-linuxero-bloguero-bloguero-linuxero-quien-queda-que_mf_18674500_feed_1.mp3
+#EXTINF:-1,Compilando Podcast - Podcast 5 – Radios Libres. Microsoft y su “amor” por GNU/Linux.
+http://compilando.audio/wp-content/uploads/2017/05/podcast5.mp3
 #EXTINF:-1,Salmorejo Geek - #122 iPhone, iOS y Linux, de como Telegram me salva la vida
 http://www.ivoox.com/122-iphone-ios-linux-como-telegram_mf_18653083_feed_1.mp3
 #EXTINF:-1,uGeek - 054. Telefónica esta siendo Atacada!!!
@@ -33,6 +109,8 @@ https://ia601503.us.archive.org/0/items/049.Syncthing/049.%20Syncthing.mp3
 http://compilando.audio/wp-content/uploads/2017/04/podcast4.mp3
 #EXTINF:-1,uGeek - 048. Encuentro de amiguetes
 https://ia601503.us.archive.org/28/items/EncuentroDeAmiguetes/Encuentro%20de%20amiguetes.mp3
+#EXTINF:-1,Ubuntu y otras hierbas - S01E01 Ubuntu mata Unity y el móvil
+https://pt.ivoox.com/pt/s01e01-ubuntu-mata-unity-movil_mf_18361665_feed_1.mp3
 #EXTINF:-1,Mosqueteroweb tecnologia, Linux, ajedrez, ... - Twitter, ¿sabemos usarlo? Android Audio y Pocket Casts
 http://www.ivoox.com/twitter-sabemos-usarlo-android-audio-pocket-casts_mf_18349090_feed_1.mp3
 #EXTINF:-1,Podcast Linux - #23 La Terminal
