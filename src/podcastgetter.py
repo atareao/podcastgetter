@@ -324,7 +324,7 @@ HTML = '''
         }
     }
     function set_playingpanel_size(){
-        var nw = ($("#panelplayer").width()-20)-$("#player").width()-$("#controls").width();
+        var nw = ($("#panelplayer").width())-$("#player").width()-$("#controls").width();
         $("#playing").width(nw);
         var ps = parseInt($("#playing").width() - 75);
         $("#podcast").width(ps);
