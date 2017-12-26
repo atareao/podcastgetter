@@ -1,10 +1,3 @@
-
----
-layout: podcasts
-title: Podcasts
-desc: "Podcasts"
-permalink: /podcasts/
----
 <article class="page">
     <div class="entry">
         <div id="inputbox" style="display: none;"><select id="select-podcast">
@@ -3045,3 +3038,6 @@ permalink: /podcasts/
         </div>
     </div> <!-- .entry -->
 </article> <!-- article -->
+<link rel="stylesheet" type="text/css" href="https://ugeek.github.io/podcasts.css" />
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="https://ugeek.github.io/podcasts.js"></script>

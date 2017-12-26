@@ -372,6 +372,10 @@ permalink: /podcasts/
         </div>
     </div> <!-- .entry -->
 </article> <!-- article -->
+</article> <!-- article -->
+<link rel="stylesheet" type="text/css" href="https://ugeek.github.io/podcasts.css" />
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="https://ugeek.github.io/podcasts.js"></script>
 '''
 
 DATABASE_FOLDER = os.path.join(os.path.expanduser('~'), '.config',
