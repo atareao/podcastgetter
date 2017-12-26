@@ -509,6 +509,7 @@ track_id, track_date, track_title, track_url) VALUES(?, ?, ?, ?, ?, ?)''',
             fcss.write(css)
             fcss.close()
 
+            print(md)
             fmd = open('podcasts.md', 'w')
             fmd.write(''.join(md) + '\n')
             fmd.close()
