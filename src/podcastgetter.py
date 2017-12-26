@@ -318,13 +318,20 @@ HTML = '''
         if (control.hasClass('random-icon')){
             control.removeClass('random-icon');
             control.addClass('norandom-icon');
-            
         }else{
             control.removeClass('norandom-icon');
             control.addClass('random-icon');
         }
     }
+    function set_playingpanel_size(){
+        var nw = ($("#panelplayer").width()-20)-$("#player").width()-$("#controls").width();
+        $("#playing").width(nw);
+        var ps = parseInt($("#playing").width() - 75);
+        $("#podcast").width(ps);
+        $("#duration").width(75);
+    }
     $(document).ready(function(){
+        set_playingpanel_size();
         cookieManager = new CookieManager(document);
         $(document).keypress(function(e){
             if(!$("#inputbox").is(":visible")){
@@ -408,6 +415,9 @@ HTML = '''
             cookieManager.set_speed(speed);
             cookieManager.save();
             $("#for-speed").hide();
+        });
+        $(window).resize(function(e){
+            set_playingpanel_size();
         });
         $(document).click(function(e){
         });
@@ -584,7 +594,6 @@ HTML = '''
         #duration{
             width: 10%;
             text-align: right;
-            margin-right: 10px;
         }
         .track, #track{
             display: block;
@@ -601,6 +610,9 @@ HTML = '''
             margin-bottom: 5px;
             padding:0;
             line-height: 1;
+        }
+        #media-info{
+            display: inline-flex;
         }
         #playing{
             float:left;
@@ -729,7 +741,7 @@ HTML = '''
       </div>
     </div>
 
-    <div id="main" role="main" class="container">
+    <div main" role="main" class="container">
       <article class="page">
 
   <h1></h1>
@@ -766,8 +778,10 @@ HTML = '''
             </audio>
         </div>
         <div id="playing">
-            <span id="podcast"></span>
-            <span id="duration"></span>
+            <span id="media-info">
+                <span id="podcast"></span>
+                <span id="duration"></span>
+            </span>
             <span id="track"></span>
             <progress id="progressbar" max="100" value=""></progress>
         </div>
