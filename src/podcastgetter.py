@@ -297,76 +297,69 @@ a:visited{
 $$STYLES$$
 '''
 HTML = '''
-<article class="page">
-    <div class="entry">
-        <div id="inputbox" style="display: none;">$$SELECT$$</div>
-        <div id="for-speed" style="display: none;">
-            <select id="select-speed">
-                <option value="0.8">0.8x</option>
-                <option value="1.0">1.0x</option>
-                <option value="1.2">1.2x</option>
-                <option value="1.4">1.4x</option>
-                <option value="1.6">1.6x</option>
-                <option value="1.8">1.8x</option>
-                <option value="2.0">2.0x</option>
-            </select>
-        </div>
-        <div class="panel" id="panelplayer" style="height: 70px;">
-            <div id="player">
-                <a href="#" id="left" onclick="return false" title="Anterior">
-                    <span class="control-icon previous-icon" aria-hidden="true"></span>
-                </a>
-                <a href="#"id="play-pause" onclick="return false" title="Reproducir">
-                    <span class="control-icon play-icon" aria-hidden="true"></span>
-                </a>
-                <a href="#" id="right" onclick="return false" title="Siguiente">
-                    <span class="control-icon next-icon" aria-hidden="true"></span>
-                </a>
+<div id="inputbox" style="display: none;">$$SELECT$$</div>
+<div id="for-speed" style="display: none;">
+    <select id="select-speed">
+        <option value="0.8">0.8x</option>
+        <option value="1.0">1.0x</option>
+        <option value="1.2">1.2x</option>
+        <option value="1.4">1.4x</option>
+        <option value="1.6">1.6x</option>
+        <option value="1.8">1.8x</option>
+        <option value="2.0">2.0x</option>
+    </select>
+</div>
+<div class="panel" id="panelplayer" style="height: 70px;">
+    <div id="player">
+        <a href="#" id="left" onclick="return false" title="Anterior">
+            <span class="control-icon previous-icon" aria-hidden="true"></span>
+        </a>
+        <a href="#" id="play-pause" onclick="return false" title="Reproducir">
+            <span class="control-icon play-icon" aria-hidden="true"></span>
+        </a>
+        <a href="#" id="right" onclick="return false" title="Siguiente">
+            <span class="control-icon next-icon" aria-hidden="true"></span>
+        </a>
+        <audio id="audio" preload="auto" tabindex="0" src="">
+            <source src="">
+        </audio>
+    </div>
+    <div id="playing">
+        <span id="media-info">
+            <span id="podcast"></span>
+            <span id="duration"></span>
+        </span>
+        <span id="track"></span>
+        <progress id="progressbar" max="100" value=""></progress>
+    </div>
+    <div id="controls" style="float: left;">
+        <!--
+        <a href="#" id="volume" onclick="return false" title="Volumen">
+            <span class="control-icon volume-icon" aria-hidden="true"></span>
+        </a>
+        <a href="#" id="random" onclick="return false" title="Volumen">
+            <span class="control-icon norandom-icon" aria-hidden="true"></span>
+        </a>
+        -->
+        <a href="#" id="search" onclick="return false" title="Filtrar">
+            <span class="control-icon search-icon" aria-hidden="true"></span>
+        </a>
+        <a href='#' id="speed" onclick="return false" title="Velocidad">
+            <span id="speed-value" aria-hidden="true">1.0x</span>
+        </a>
+        <!--
+        <a href="#" id="download" onclick="return false" title="Descargar">
+            <span class="control-icon download-icon" aria-hidden="true"></span>
+        </a>
+        -->
+    </div>
+</div>
 
-
-                <audio id="audio" preload="auto" tabindex="0" src="http://www.ivoox.com/radiogeek-el-gobierno-argentina-aprobo-la_mf_22791929_feed_1.mp3">
-                    <source src="">
-                </audio>
-            </div>
-            <div id="playing">
-                <span id="media-info">
-                    <span id="podcast"></span>
-                    <span id="duration"></span>
-                </span>
-                <span id="track"></span>
-                <progress id="progressbar" max="100" value=""></progress>
-            </div>
-            <div id="controls" style="float: left;">
-                <!--
-                <a href="#" id="volume" onclick="return false" title="Volumen">
-                    <span class="control-icon volume-icon" aria-hidden="true"></span>
-                </a>
-                <a href="#" id="random" onclick="return false" title="Volumen">
-                    <span class="control-icon norandom-icon" aria-hidden="true"></span>
-                </a>
-                -->
-                <a href="#" id="search" onclick="return false" title="Filtrar">
-                    <span class="control-icon search-icon" aria-hidden="true"></span>
-                </a>
-                <a href='#' id="speed" onclick="return false" title="Velocidad">
-                    <span id="speed-value" aria-hidden="true">1.0x</span>
-                </a>
-                <!--
-                <a href="#" id="download" onclick="return false" title="Descargar">
-                    <span class="control-icon download-icon" aria-hidden="true"></span>
-                </a>
-                -->
-            </div>
-        </div>
-
-        <div class="panel">
-            <ul id="playlist">
-                $$PLAYLIST$$
-            </ul>
-        </div>
-    </div> <!-- .entry -->
-</article> <!-- article -->
-</article> <!-- article -->
+<div class="panel">
+    <ul id="playlist">
+        $$PLAYLIST$$
+    </ul>
+</div>
 <link rel="stylesheet" type="text/css" href="https://ugeek.github.io/podcasts.css" />
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="https://ugeek.github.io/podcasts.js"></script>
