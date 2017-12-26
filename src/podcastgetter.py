@@ -17,12 +17,47 @@ FORMAT_DESCRIPTOR = "#EXTM3U"
 RECORD_MARKER = "#EXTINF"
 
 PODCASTS = [
+     'http://feeds.feedburner.com/ugeek',
+    'http://www.ivoox.com/podcast-podcast-coffee-break_fg_f1172891_filtro_1.xml',
+    'http://feedpress.me/droidtalks',
+    'http://www.ivoox.com/meditacion-online-mindfulness_fg_f1380293_filtro_1.xml',
+    'http://www.spreaker.com/show/1210251/episodes/feed',
+    'Http://feeds.feedburner.com/blogbemoob',
+    'http://www.ivoox.com/podcast-wintablet-info_fg_f1111914_filtro_1.xml',
     'http://www.ivoox.com/salmorejo-geek_fg_f1206500_filtro_1.xml',
     'http://www.ivoox.com/podcast-linux_fg_f1297890_filtro_1.xml',
+    'http://deployando.me/feed/podcast',
+    'http://feeds.feedburner.com/linuxexpress',
+    'https://anchor.fm/s/18c0860/podcast/rss',
     'https://www.ivoox.com/ubuntu-otras-hierbas_fg_f1412582_filtro_1.xml',
-    'http://feeds.feedburner.com/ugeek',
+    'http://www.ivoox.com/feed_fg_f12610_filtro_1.xml',
+    'http://feeds.feedburner.com/OdaibaNet',
     'https://www.eduardocollado.com/category/podcast/feed/',
+    'https://maratonlinuxero.org/feed',
+    'http://feeds.feedburner.com/Vaciatubandeja',
+    'https://www.danielprimo.io/podcast/feed.xml',
+    'http://feeds.feedburner.com/educandogeek',
+    'http://www.ivoox.com/aprendiendo-gtd-podcast_fg_f1286811_filtro_1.xml',
+    'http://feedpress.me/culturanas',
     'https://compilando.audio/index.php/feed/podcast/',
+    'https://feedpress.me/bateria2x100',
+    'http://feedpress.me/naseros',
+    'http://www.ivoox.com/procrastinacion-cafe_fg_f1440919_filtro_1.xml',
+    'http://www.ivoox.com/podcast-podcast-radiogeek_fg_f129471_filtro_1.xml',
+    'http://feeds.feedburner.com/nolegaltechradio',
+    'http://feedpress.me/edyo',
+    'http://www.ivoox.com/podcast-kde-espana_fg_f1249423_filtro_1.xml',
+    'http://www.spreaker.com/show/1388485/episodes/feed',
+    'http://lahoramaker.com/feed/podcast/',
+    'http://wedevelopers.com/feed/podcast/',
+    'http://www.spreaker.com/show/1917879/episodes/feed',
+    'http://www.ivoox.com/code-time_fg_f1277365_filtro_1.xml',
+    'http://feeds.feedburner.com/WecodesignPodcast',
+    'http://www.ivoox.com/programar-es-mierda_fg_f1432444_filtro_1.xml',
+    'http://tecnologeria.com/tecnologeria/feed/',
+    'http://www.ivoox.com/republica-web_fg_f1288530_filtro_1.xml',
+    'http://www.feedpress.me/ciberseguridad',
+    'http://www.ivoox.com/reflex-podcast_fg_f1407484_filtro_1.xml',
     'https://www.ivoox.com/mosqueteroweb-tecnologia-linux-ajedrez_fg_f1248962_filtro_1.xml']
 
 STYLE = '.%s{\tbackground: url(\'data:image/png;base64,%s\');}\n'
@@ -469,14 +504,14 @@ track_id, track_date, track_title, track_url) VALUES(?, ?, ?, ?, ?, ?)''',
                 mh.append('<li>\n')
             mh.append('\t<span id="item-{0}">\n'.format(index))
             mh.append('\t\t<a href="#" data-media="{0}" title="{1}">\n'.format(
-                track_url, track_title))
+                track_url, track_title.replace('"', '\'')))
             mh.append('\t\t\t<span class="isplaying"></span>\n')
             mh.append('\t\t\t<span class="logo {0}"></span>\n'.format(
                 podcast_class))
             mh.append('\t\t\t<span class="podcast">{0}</span>\n'.format(
-                podcast_title))
+                podcast_title.replace('"', '\'')))
             mh.append('\t\t\t<span class="track">{0}</span>\n'.format(
-                track_title))
+                track_title.replace('"', '\'')))
             mh.append('\t\t</a>\n')
             mh.append('\t</span>\n')
             mh.append('</li>\n')
