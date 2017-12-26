@@ -60,36 +60,13 @@ HTML = '''
     var ntracks;
     var position = 0;
     var speed = 1;
-    class CookieManager{
-        constructor(adocument){
-            this.adocument = adocument;
-            this.speed = this.readCookie('speed');
-            this.podcast = this.readCookie('podcast');
-            console.log(this.speed, this.podcast);
-        }
-        readCookie(name) {
-              return decodeURIComponent(this.adocument.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + name.replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
-        }
-        set_speed(speed){
-            this.speed = speed;
-        }
-        get_speed(){
-            return this.speed;
-        }
-        set_podcast(podcast){
-            this.podcast = podcast;
-        }
-        get_podcast(){
-            return this.podcast;
-        }
-        save(){
-            var date = new Date();
-            date.setTime(date.getTime() + (10*365*24*60*60*1000));
-            var expires = "; expires=" + date.toUTCString();
-            this.adocument.cookie = "speed=" + encodeURIComponent(this.speed) + expires + "; ";
-            this.adocument.cookie = "podcast=" + encodeURIComponent(this.podcast) + expires + "; ";
-        }
-    };
+    function setCookie(key, value){
+      document.cookie = key + "=" + String(value);
+    }
+    function getCookie(key) {
+        var b = document.cookie.match('(^|;)\\s*' + key + '\\s*=\\s*([^;]+)');
+        return b ? b.pop() : null;
+    }
     function next_random(){
         return Math.floor(Math.random()*ntracks);
     }
@@ -332,7 +309,6 @@ HTML = '''
     }
     $(document).ready(function(){
         set_playingpanel_size();
-        cookieManager = new CookieManager(document);
         $(document).keypress(function(e){
             if(!$("#inputbox").is(":visible")){
                 console.log(e.originalEvent.key);
@@ -375,45 +351,42 @@ HTML = '''
             }catch(e){}
 
             $("#inputbox").hide();
-            cookieManager.set_podcast(this.value);
-            cookieManager.save();
-            console.log(cookieManager.get_podcast());
+            setCookie('podcast', this.value);
         });
         $("#search").click(function(e){
             if($("#inputbox").is(":visible")){
                 $("#inputbox").hide();
             }else{
+                if($("#for-speed").is(':visible')){
+                    $("#for-speed").hide();
+                }
                 $("#inputbox").show();
-                //$("#inputbox").html("<input id='search-text' type='text' value=''>");
-                var left = ($("#search").position().left - 200)+ "px";
+                var left = $("span.control-icon.search-icon").position().left-$("#inputbox").width()+50;
                 $("#inputbox").css("left", left);
-                var top = ($("#search").position().top - 45) + "px";
+                var top = $("span.control-icon.search-icon").position().top-$("#inputbox").height()-30;
                 $("#inputbox").css("top", top);
-                console.log(left);
-                console.log(top);
             }
         });
         $("#speed").click(function(e){
             if($("#for-speed").is(":visible")){
                 $("#for-speed").hide();
             }else{
+                if($("#inputbox").is(':visible')){
+                    $("#inputbox").hide();
+                }
                 $("#for-speed").show();
                 $("#select-speed").val($("#speed-value").text().substring(0,3));
-                //$("#inputbox").html("<input id='search-text' type='text' value=''>");
-                var left = ($("#search").position().left - 5)+ "px";
+                var left = $("#speed-value").position().left-$("#for-speed").width()/2.0;
                 $("#for-speed").css("left", left);
-                var top = ($("#search").position().top - 35) + "px";
+                var top = $("#speed-value").position().top-$("#for-speed").height()-30;
                 $("#for-speed").css("top", top);
-                console.log(left);
-                console.log(top);
             }
         });
         $("#select-speed").change(function(e){
             speed = this.value;
             audio[0].playbackRate = speed;
             $("#speed-value").text(this.value+'x');
-            cookieManager.set_speed(speed);
-            cookieManager.save();
+            setCookie('speed', this.value);
             $("#for-speed").hide();
         });
         $(window).resize(function(e){
@@ -439,8 +412,16 @@ HTML = '''
         $("#random").click(function(){
             randomnorandom();
         });
-        $("#play-pause").html('<span class="control-icon play-icon" aria-hidden="true"></span>')
         initaudio();
+        var speedCookie = getCookie('speed');
+        var podcastCookie = getCookie('podcast');
+        if(speedCookie != null){
+            speed = parseFloat(speedCookie);
+            audio[0].playbackRate = speed;
+            $("#speed-value").text(speedCookie+'x');
+
+        }
+        console.log(speedCookie, podcastCookie);
     });
     </script>
     <style>
