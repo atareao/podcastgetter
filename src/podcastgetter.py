@@ -297,12 +297,6 @@ a:visited{
 $$STYLES$$
 '''
 HTML = '''
----
-layout: podcasts
-title: Podcasts
-desc: "Podcasts"
-permalink: /podcasts/
----
 <article class="page">
     <div class="entry">
         <div id="inputbox" style="display: none;">$$SELECT$$</div>
@@ -507,7 +501,7 @@ track_id, track_date, track_title, track_url) VALUES(?, ?, ?, ?, ?, ?)''',
             html = HTML.replace('$$SELECT$$', selecthtml)
             html = html.replace('$$PLAYLIST$$', ''.join(mh) + '\n')
 
-            fhtml = open('podcasts.md', 'w')
+            fhtml = open('podcasts.html', 'w')
             fhtml.write(html)
             fhtml.close()
 
@@ -515,15 +509,15 @@ track_id, track_date, track_title, track_url) VALUES(?, ?, ?, ?, ?, ?)''',
             fcss.write(css)
             fcss.close()
 
-            '''
             fmd = open('podcasts.md', 'w')
             fmd.write(''.join(md) + '\n')
             fmd.close()
+
             fp = open('podcasts.m3u', 'w')
             fp.write(FORMAT_DESCRIPTOR + '\n')
             fp.write(''.join(m3) + '\n')
             fp.close()
-            '''
+
         except Exception as e:
             print(e)
 
