@@ -65,8 +65,7 @@ STYLE = '.%s{\tbackground: url(\'data:image/png;base64,%s\');}\n'
 CSS = '''
 #speed-value{
     position: relative;
-    top: 9px;
-    line-height: 32px;
+    top: 3px;
     font-size: 14px;
 }
 #select-podcast{
@@ -260,6 +259,14 @@ a:visited{
     .panel{
         width:600px;
     }
+}
+span.control-icon.search-icon{
+    top: 0px;
+    float: right;
+}
+#search, #speed{
+    float: left;
+    width: 100%;
 }
 @media only screen and (max-width: 319px) {
     #left, #right{
